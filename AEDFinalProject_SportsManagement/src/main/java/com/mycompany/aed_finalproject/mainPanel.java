@@ -6,6 +6,9 @@ package com.mycompany.aed_finalproject;
 
 import Model.Venue;
 import javax.swing.JOptionPane;
+import org.bson.Document;
+import com.mongodb.client.MongoCollection;
+import com.mycompany.aed_finalproject.AED_FinalProject.database;
 
 /**
  *
@@ -222,10 +225,24 @@ public class mainPanel extends javax.swing.JPanel {
         venue.setMainPassword(mainPasswordTextF.getText());
         long phone = Long.parseLong(mainPhoneTextF.getText());
         venue.setMainPhone(phone);
-        venue.setMainEmail(mainEmailTextF.getText());
+        venue.setMainEmail(mainEmailTextF.getText()); 
+        
+        
+        Document mainStaff = new Document();
+        mainStaff.put("UserId",mainUserIdTextF.getText());
+        mainStaff.put("Name",mainNameTextF.getText());
+        mainStaff.put("Password",mainPasswordTextF.getText());
+        mainStaff.put("Phone",phone);
+        mainStaff.put("Email",mainEmailTextF.getText());
+        database db = new database();
+        db.maintenanceStaff.insertOne(mainStaff);
         
         JOptionPane.showMessageDialog(this,"Security personel Information Created");
-        System.out.println("Reached here");
+        mainUserIdTextF.setText("");
+        mainNameTextF.setText("");
+        mainPasswordTextF.setText("");
+        mainPhoneTextF.setText("");
+        mainEmailTextF.setText("");
         
     }//GEN-LAST:event_mainCreateButtonActionPerformed
 

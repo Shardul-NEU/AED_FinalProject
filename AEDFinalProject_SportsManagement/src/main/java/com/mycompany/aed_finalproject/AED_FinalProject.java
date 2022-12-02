@@ -18,17 +18,23 @@ import org.bson.Document;
  * @author Shardul
  */
 public class AED_FinalProject {
-
-    public static void main(String[] args) {
+    
+    public static class database{
         MongoClient client = MongoClients.create("mongodb+srv://suraj:7021072380@cluster0.ehrr7jd.mongodb.net/?retryWrites=true&w=majority");
         MongoDatabase database = client.getDatabase("SportsManagement");
+        MongoCollection<Document> admin = database.getCollection("admin");
+        MongoCollection<Document> maintenanceStaff = database.getCollection("maintenanceStaff");
+    }
+
+    public static void main(String[] args) {
+        
         
 //      If want to connect to new collection create instacne below this.
 //      And pass the object to other class.
-        MongoCollection<Document> admin = database.getCollection("admin");
 //      collection initialization ends here
+database db = new database();
 // The following code is to test the connection
-        FindIterable<Document> iterDoc = admin.find();
+        FindIterable<Document> iterDoc = db.maintenanceStaff.find();
       Iterator it = iterDoc.iterator();
       while (it.hasNext()) {
          System.out.println(it.next());
