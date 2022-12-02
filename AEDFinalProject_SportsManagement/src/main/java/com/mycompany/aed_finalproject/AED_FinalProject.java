@@ -32,7 +32,8 @@ public class AED_FinalProject {
       Iterator it = iterDoc.iterator();
       while (it.hasNext()) {
          System.out.println(it.next());
-
+         VenuePageFrame frame = new VenuePageFrame();
+        frame.setVisible(true);
     }
     }
 }

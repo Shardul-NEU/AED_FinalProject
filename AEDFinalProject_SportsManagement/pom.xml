@@ -27,7 +27,11 @@
             <artifactId>mongodb-driver-sync</artifactId>
             <version>4.0.5</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE150</version>
+        </dependency>
     </dependencies>
     <name>AEDFinalProject_SportsManagemet</name>
 </project>
