@@ -21,10 +21,31 @@ public class mainPanel extends javax.swing.JPanel {
      * Creates new form mainPanel
      */
     Venue venue;
+    
+    //creates a new db connection
+    database db = new database();
+    
+    // code to update the table on the page
+    String[] columnNames = {"UserId", "Name", "Phone", "Email"};
+    private void tableUpdate(String[] columnNames){
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        MongoCursor<Document> cursor = db.maintenanceStaff.find().iterator();
+        while (cursor.hasNext()) {
+            Object obj = cursor.next();
+            Document dc = (Document) obj;
+            String UserId = (String)dc.get("UserId");
+            String Name = (String)dc.get("Name");
+            Long Phone  = (Long)dc.get("Phone");
+            String Email = (String)dc.get("Email");
+            model.addRow(new Object[] {UserId, Name, Phone, Email });
+        }
+        mainTable.setModel(model);
+    }
+    
     public mainPanel(Venue venue) {
         initComponents();
         this.venue = venue;
-        
+        tableUpdate(columnNames);
     }
 
     /**
@@ -257,27 +278,11 @@ public class mainPanel extends javax.swing.JPanel {
         mainStaff.put("Password",mainPasswordTextF.getText());
         mainStaff.put("Phone",phone);
         mainStaff.put("Email",mainEmailTextF.getText());
-        database db = new database();
         db.maintenanceStaff.insertOne(mainStaff);
         
         JOptionPane.showMessageDialog(this,"Security personel Information Created");
+        tableUpdate(columnNames);
         
-        String[] columnNames = {"UserId", "Name", "Phone", "Email"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
-        
-        
-        MongoCursor<Document> cursor = db.maintenanceStaff.find().iterator();
-        while (cursor.hasNext()) {
-            Object obj = cursor.next();
-            Document dc = (Document) obj;
-            String UserId = (String)dc.get("UserId");
-            String Name = (String)dc.get("Name");
-            Long Phone  = (Long)dc.get("Phone");
-            String Email = (String)dc.get("Email");
-            model.addRow(new Object[] {UserId, Name, Phone, Email });
-        }
-        mainTable.setModel(model);
-          
         mainUserIdTextF.setText("");
         mainNameTextF.setText("");
         mainPasswordTextF.setText("");
