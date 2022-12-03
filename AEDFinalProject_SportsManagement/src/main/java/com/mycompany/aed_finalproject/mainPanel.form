@@ -125,11 +125,17 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="mainNameTextF">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainNameTextFActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="mainDeleteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Delete"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainDeleteButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="mainPasswordTextF">
       <Events>
@@ -184,6 +190,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainUpdateButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="mainPhoneLabel">
       <Properties>
@@ -194,6 +203,19 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Email"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="mainUserIdTextF">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainUserIdTextFActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="mainViewButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainViewButtonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="secScrollPane">
       <AuxValues>
@@ -243,15 +265,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="mainUserIdTextF">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mainUserIdTextFActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="mainViewButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View"/>
-      </Properties>
-    </Component>
   </SubComponents>
 </Form>

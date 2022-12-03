@@ -5,6 +5,10 @@
 package com.mycompany.aed_finalproject;
 
 import Model.Venue;
+import com.mongodb.client.MongoCursor;
+import com.mycompany.aed_finalproject.AED_FinalProject.database;
+import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
 
 /**
  *
@@ -20,6 +24,7 @@ public class VenuePageFrame extends javax.swing.JFrame {
         initComponents();
         venue = new Venue();
     }
+    database db = new database();
 
     /**
      * This method is called from within the constructor to initialize the form.

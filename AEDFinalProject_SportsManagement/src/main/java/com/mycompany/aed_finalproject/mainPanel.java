@@ -5,10 +5,11 @@
 package com.mycompany.aed_finalproject;
 
 import Model.Venue;
+import com.mongodb.client.MongoCursor;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import com.mongodb.client.MongoCollection;
 import com.mycompany.aed_finalproject.AED_FinalProject.database;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,6 +24,7 @@ public class mainPanel extends javax.swing.JPanel {
     public mainPanel(Venue venue) {
         initComponents();
         this.venue = venue;
+        
     }
 
     /**
@@ -49,12 +51,23 @@ public class mainPanel extends javax.swing.JPanel {
         mainUpdateButton = new javax.swing.JButton();
         mainPhoneLabel = new javax.swing.JLabel();
         mainEmailLabel = new javax.swing.JLabel();
-        secScrollPane = new javax.swing.JScrollPane();
-        mainTable = new javax.swing.JTable();
         mainUserIdTextF = new javax.swing.JTextField();
         mainViewButton = new javax.swing.JButton();
+        secScrollPane = new javax.swing.JScrollPane();
+        mainTable = new javax.swing.JTable();
+
+        mainNameTextF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainNameTextFActionPerformed(evt);
+            }
+        });
 
         mainDeleteButton.setText("Delete");
+        mainDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainDeleteButtonActionPerformed(evt);
+            }
+        });
 
         mainPasswordTextF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,10 +101,28 @@ public class mainPanel extends javax.swing.JPanel {
         mainNameLabel.setText("Name");
 
         mainUpdateButton.setText("Update");
+        mainUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainUpdateButtonActionPerformed(evt);
+            }
+        });
 
         mainPhoneLabel.setText("Phone");
 
         mainEmailLabel.setText("Email");
+
+        mainUserIdTextF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainUserIdTextFActionPerformed(evt);
+            }
+        });
+
+        mainViewButton.setText("View");
+        mainViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainViewButtonActionPerformed(evt);
+            }
+        });
 
         mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,14 +144,6 @@ public class mainPanel extends javax.swing.JPanel {
             }
         });
         secScrollPane.setViewportView(mainTable);
-
-        mainUserIdTextF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mainUserIdTextFActionPerformed(evt);
-            }
-        });
-
-        mainViewButton.setText("View");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -238,6 +261,23 @@ public class mainPanel extends javax.swing.JPanel {
         db.maintenanceStaff.insertOne(mainStaff);
         
         JOptionPane.showMessageDialog(this,"Security personel Information Created");
+        
+        String[] columnNames = {"UserId", "Name", "Phone", "Email"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        
+        
+        MongoCursor<Document> cursor = db.maintenanceStaff.find().iterator();
+        while (cursor.hasNext()) {
+            Object obj = cursor.next();
+            Document dc = (Document) obj;
+            String UserId = (String)dc.get("UserId");
+            String Name = (String)dc.get("Name");
+            Long Phone  = (Long)dc.get("Phone");
+            String Email = (String)dc.get("Email");
+            model.addRow(new Object[] {UserId, Name, Phone, Email });
+        }
+        mainTable.setModel(model);
+          
         mainUserIdTextF.setText("");
         mainNameTextF.setText("");
         mainPasswordTextF.setText("");
@@ -249,6 +289,22 @@ public class mainPanel extends javax.swing.JPanel {
     private void mainUserIdTextFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUserIdTextFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mainUserIdTextFActionPerformed
+
+    private void mainViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainViewButtonActionPerformed
+
+    private void mainUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUpdateButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainUpdateButtonActionPerformed
+
+    private void mainDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainDeleteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainDeleteButtonActionPerformed
+
+    private void mainNameTextFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainNameTextFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mainNameTextFActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

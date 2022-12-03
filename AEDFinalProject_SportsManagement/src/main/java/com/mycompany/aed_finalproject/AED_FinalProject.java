@@ -5,6 +5,8 @@
 
 package com.mycompany.aed_finalproject;
 
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -34,13 +36,12 @@ public class AED_FinalProject {
 //      collection initialization ends here
 database db = new database();
 // The following code is to test the connection
-        FindIterable<Document> iterDoc = db.maintenanceStaff.find();
-      Iterator it = iterDoc.iterator();
-      while (it.hasNext()) {
-         System.out.println(it.next());
+//      FindIterable<Document> iterDoc = db.maintenanceStaff.find();
+//      Iterator it = iterDoc.iterator();
+//      while (it.hasNext()) {
+//         System.out.println(it.next());
          VenuePageFrame frame = new VenuePageFrame();
         frame.setVisible(true);
     }
     }
-}
     
