@@ -6,6 +6,9 @@ package com.mycompany.aed_finalproject;
 
 import Model.Venue;
 import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.combine;
+import static com.mongodb.client.model.Updates.set;
 import javax.swing.JOptionPane;
 import org.bson.Document;
 import com.mycompany.aed_finalproject.AED_FinalProject.database;
@@ -21,10 +24,10 @@ public class mainPanel extends javax.swing.JPanel {
      * Creates new form mainPanel
      */
     Venue venue;
-    
+
     //creates a new db connection
     database db = new database();
-    
+
     // code to update the table on the page
     String[] columnNames = {"UserId", "Name", "Phone", "Email"};
     private void tableUpdate(String[] columnNames){
@@ -41,13 +44,48 @@ public class mainPanel extends javax.swing.JPanel {
         }
         mainTable.setModel(model);
     }
-    
+
     public mainPanel(Venue venue) {
         initComponents();
         this.venue = venue;
+
         tableUpdate(columnNames);
     }
-
+    
+    //method to clear text fields in the page
+    private void clearFields(){
+        mainUserIdTextF.setText("");
+        mainNameTextF.setText("");
+        mainPasswordTextF.setText("");
+        mainPhoneTextF.setText("");
+        mainEmailTextF.setText("");
+    }
+    
+    private Document selectedRowData(int rowSelected){
+    String key = mainTable.getColumnName(0);
+        MongoCursor<Document> cursor = db.maintenanceStaff.find().iterator();
+        Document result = new Document();
+        while (cursor.hasNext()) {
+            Object obj = cursor.next();
+            Document dc = (Document) obj;
+            String check = dc.getString(key);
+            for(String value = mainTable.getValueAt(rowSelected, 0).toString();check.equals(value);){
+//            System.out.println(value);
+//            System.out.println(dc);
+            result = dc;
+            break;
+            }
+        }
+        return result;
+    }
+    
+    private void resetTable(Document dc){
+        mainUserIdTextF.setText(dc.getString("UserId"));
+        mainNameTextF.setText(dc.getString("Name"));
+        mainPasswordTextF.setText(dc.getString("Password"));
+        mainPhoneTextF.setText(dc.getLong("Phone").toString());
+        mainEmailTextF.setText(dc.getString("Email"));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -269,7 +307,7 @@ public class mainPanel extends javax.swing.JPanel {
         venue.setMainName(mainNameTextF.getText());
         venue.setMainPassword(mainPasswordTextF.getText());
         long phone = Long.parseLong(mainPhoneTextF.getText());
-        venue.setMainPhone(phone);
+        //venue.setMainPhone(phone);
         venue.setMainEmail(mainEmailTextF.getText()); 
         
         
@@ -283,12 +321,7 @@ public class mainPanel extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(this,"Security personel Information Created");
         tableUpdate(columnNames);
-        
-        mainUserIdTextF.setText("");
-        mainNameTextF.setText("");
-        mainPasswordTextF.setText("");
-        mainPhoneTextF.setText("");
-        mainEmailTextF.setText("");
+        clearFields();
         
     }//GEN-LAST:event_mainCreateButtonActionPerformed
 
@@ -298,34 +331,26 @@ public class mainPanel extends javax.swing.JPanel {
 
     private void mainViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewButtonActionPerformed
         // TODO add your handling code here:
-        int rowSelected = mainTable.getSelectedRow();
-        if (rowSelected<0) {
+        int selectedIndex= mainTable.getSelectedRow();
+        if (selectedIndex<0) {
             JOptionPane.showMessageDialog(this, "Select a row to view details");
-            return;
         }
-        String key = mainTable.getColumnName(0);
-        MongoCursor<Document> cursor = db.maintenanceStaff.find().iterator();
-        while (cursor.hasNext()) {
-            Object obj = cursor.next();
-            Document dc = (Document) obj;
-            String check = dc.getString(key);
-            for(String value = mainTable.getValueAt(rowSelected, 0).toString();check.equals(value);){
-            System.out.println(value);
-            break;
-            }
-        mainUserIdTextF.setText(dc.getString("UserId"));
-        mainNameTextF.setText(dc.getString("Name"));
-        mainPasswordTextF.setText(dc.getString("Password"));
-        mainPhoneTextF.setText(dc.getLong("Phone").toString());
-        mainEmailTextF.setText(dc.getString("Email"));
-        }
-        
-        
+        Document dc = selectedRowData(selectedIndex);
+        resetTable(dc);
         
     }//GEN-LAST:event_mainViewButtonActionPerformed
 
     private void mainUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUpdateButtonActionPerformed
-        // TODO add your handling code here:
+  // TODO add your handling code here:
+       String userId = mainUserIdTextF.getText();
+       long Phone = 93939939343L;
+         db.maintenanceStaff.updateOne(
+              eq("UserId","Adam"),
+                combine(set("Name","Roshan"), set("Password", "JustChanged"),
+                        set("Phone",Phone), set("Email","changedtwice@gmail.com")));
+        tableUpdate(columnNames);
+             
+        
     }//GEN-LAST:event_mainUpdateButtonActionPerformed
 
     private void mainDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainDeleteButtonActionPerformed

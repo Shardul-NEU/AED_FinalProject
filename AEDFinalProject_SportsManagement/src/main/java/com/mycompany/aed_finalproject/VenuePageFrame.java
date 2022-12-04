@@ -5,10 +5,7 @@
 package com.mycompany.aed_finalproject;
 
 import Model.Venue;
-import com.mongodb.client.MongoCursor;
 import com.mycompany.aed_finalproject.AED_FinalProject.database;
-import javax.swing.table.DefaultTableModel;
-import org.bson.Document;
 
 /**
  *
