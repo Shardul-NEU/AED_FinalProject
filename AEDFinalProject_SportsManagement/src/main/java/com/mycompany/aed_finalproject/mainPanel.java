@@ -153,7 +153,7 @@ public class mainPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "User ID", "Name", "Phone", "Email"
+                "UserId", "Name", "Phone", "Email"
             }
         ) {
             Class[] types = new Class [] {
@@ -164,6 +164,7 @@ public class mainPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        mainTable.getTableHeader().setReorderingAllowed(false);
         secScrollPane.setViewportView(mainTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -297,6 +298,30 @@ public class mainPanel extends javax.swing.JPanel {
 
     private void mainViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainViewButtonActionPerformed
         // TODO add your handling code here:
+        int rowSelected = mainTable.getSelectedRow();
+        if (rowSelected<0) {
+            JOptionPane.showMessageDialog(this, "Select a row to view details");
+            return;
+        }
+        String key = mainTable.getColumnName(0);
+        MongoCursor<Document> cursor = db.maintenanceStaff.find().iterator();
+        while (cursor.hasNext()) {
+            Object obj = cursor.next();
+            Document dc = (Document) obj;
+            String check = dc.getString(key);
+            for(String value = mainTable.getValueAt(rowSelected, 0).toString();check.equals(value);){
+            System.out.println(value);
+            break;
+            }
+        mainUserIdTextF.setText(dc.getString("UserId"));
+        mainNameTextF.setText(dc.getString("Name"));
+        mainPasswordTextF.setText(dc.getString("Password"));
+        mainPhoneTextF.setText(dc.getLong("Phone").toString());
+        mainEmailTextF.setText(dc.getString("Email"));
+        }
+        
+        
+        
     }//GEN-LAST:event_mainViewButtonActionPerformed
 
     private void mainUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUpdateButtonActionPerformed
