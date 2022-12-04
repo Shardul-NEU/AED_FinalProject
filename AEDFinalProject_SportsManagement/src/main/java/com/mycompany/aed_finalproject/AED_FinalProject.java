@@ -5,14 +5,10 @@
 
 package com.mycompany.aed_finalproject;
 
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import java.util.Iterator;
 import org.bson.Document;
 
 /**
@@ -26,6 +22,7 @@ public class AED_FinalProject {
         MongoDatabase database = client.getDatabase("SportsManagement");
         MongoCollection<Document> admin = database.getCollection("admin");
         MongoCollection<Document> maintenanceStaff = database.getCollection("maintenanceStaff");
+        MongoCollection<Document> securityStaff = database.getCollection("securityStaff");
     }
 
     public static void main(String[] args) {
@@ -34,8 +31,7 @@ public class AED_FinalProject {
 //      If want to connect to new collection create instacne below this.
 //      And pass the object to other class.
 //      collection initialization ends here
-database db = new database();
-// The following code is to test the connection
+        // The following code is to test the connection
 //      FindIterable<Document> iterDoc = db.maintenanceStaff.find();
 //      Iterator it = iterDoc.iterator();
 //      while (it.hasNext()) {

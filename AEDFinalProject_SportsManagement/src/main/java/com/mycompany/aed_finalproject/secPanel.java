@@ -5,6 +5,14 @@
 package com.mycompany.aed_finalproject;
 
 import Model.Venue;
+import com.mongodb.client.MongoCursor;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.combine;
+import static com.mongodb.client.model.Updates.set;
+import javax.swing.JOptionPane;
+import org.bson.Document;
+import com.mycompany.aed_finalproject.AED_FinalProject.database;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,10 +23,63 @@ public class secPanel extends javax.swing.JPanel {
     /**
      * Creates new form secPanel
      */
-    Venue venue;
+    // creates an instance of database
+    database db = new database();
+    
+   // code to update the table on the page
+    
+    private void tableUpdate(){
+        String[] columnNames = {"UserId", "Name", "Phone", "Email"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+        MongoCursor<Document> cursor = db.securityStaff.find().iterator();
+        while (cursor.hasNext()) {
+            Object obj = cursor.next();
+            Document dc = (Document) obj;
+            String UserId = (String)dc.get("UserId");
+            String Name = (String)dc.get("Name");
+            Long Phone  = (Long)dc.get("Phone");
+            String Email = (String)dc.get("Email");
+            model.addRow(new Object[] {UserId, Name, Phone, Email });
+        }
+        secTable.setModel(model);
+    } 
     public secPanel(Venue venue) {
         initComponents();
-        this.venue = venue;
+        tableUpdate();
+    }
+    //method to clear text fields in the page
+    private void clearFields(){
+        secUserIdTextF.setText("");
+        secNameTextF.setText("");
+        secPasswordTextF.setText("");
+        secPhoneTextF.setText("");
+        secEmailTextF.setText("");
+    }
+    
+    private Document selectedRowData(int rowSelected){
+    String key = secTable.getColumnName(0);
+        MongoCursor<Document> cursor = db.securityStaff.find().iterator();
+        Document result = new Document();
+        while (cursor.hasNext()) {
+            Object obj = cursor.next();
+            Document dc = (Document) obj;
+            String check = dc.getString(key);
+            for(String value = secTable.getValueAt(rowSelected, 0).toString();check.equals(value);){
+//            System.out.println(value);
+//            System.out.println(dc);
+            result = dc;
+            break;
+            }
+        }
+        return result;
+    }
+    // code to reset fields in the page
+     private void resetFields(Document dc){
+        secUserIdTextF.setText(dc.getString("UserId"));
+        secNameTextF.setText(dc.getString("Name"));
+        secPasswordTextF.setText(dc.getString("Password"));
+        secPhoneTextF.setText(dc.getLong("Phone").toString());
+        secEmailTextF.setText(dc.getString("Email"));
     }
 
     /**
@@ -47,11 +108,12 @@ public class secPanel extends javax.swing.JPanel {
         secUpdateButton = new javax.swing.JButton();
         secViewButton = new javax.swing.JButton();
         secScrollPane = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        secTable = new javax.swing.JTable();
         secDeleteButton = new javax.swing.JButton();
+        secCancelButton = new javax.swing.JButton();
 
         secHedingLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        secHedingLabel.setText("Security");
+        secHedingLabel.setText("Security Staff");
         secHedingLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         secUserIDLabel.setText("User ID");
@@ -83,6 +145,11 @@ public class secPanel extends javax.swing.JPanel {
         });
 
         secSearchButton.setText("Search");
+        secSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secSearchButtonActionPerformed(evt);
+            }
+        });
 
         secCreateButton.setText("Create");
         secCreateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,10 +159,20 @@ public class secPanel extends javax.swing.JPanel {
         });
 
         secUpdateButton.setText("Update");
+        secUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secUpdateButtonActionPerformed(evt);
+            }
+        });
 
         secViewButton.setText("View");
+        secViewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secViewButtonActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        secTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -114,9 +191,21 @@ public class secPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
-        secScrollPane.setViewportView(jTable1);
+        secScrollPane.setViewportView(secTable);
 
         secDeleteButton.setText("Delete");
+        secDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secDeleteButtonActionPerformed(evt);
+            }
+        });
+
+        secCancelButton.setText("Cancel");
+        secCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                secCancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -124,8 +213,8 @@ public class secPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(secCreateButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(secViewButton)
@@ -133,8 +222,9 @@ public class secPanel extends javax.swing.JPanel {
                         .addComponent(secUpdateButton)
                         .addGap(18, 18, 18)
                         .addComponent(secDeleteButton)
-                        .addGap(226, 226, 226))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGap(151, 151, 151)
+                        .addComponent(secCancelButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(secHedingLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -203,7 +293,8 @@ public class secPanel extends javax.swing.JPanel {
                     .addComponent(secCreateButton)
                     .addComponent(secViewButton)
                     .addComponent(secDeleteButton)
-                    .addComponent(secUpdateButton))
+                    .addComponent(secUpdateButton)
+                    .addComponent(secCancelButton))
                 .addContainerGap(69, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -222,11 +313,86 @@ public class secPanel extends javax.swing.JPanel {
 
     private void secCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secCreateButtonActionPerformed
         // TODO add your handling code here:
+        String check ="";
+        String selected= secUserIdTextF.getText();
+        if (selected.equals(check)) {
+            JOptionPane.showMessageDialog(this, "Create Unsuccessful : Blank Fields Found");
+        }
+        else {
+        Document secStaff = new Document();
+        secStaff.put("UserId",secUserIdTextF.getText());
+        secStaff.put("Name",secNameTextF.getText());
+        secStaff.put("Password",secPasswordTextF.getText());
+        long phone = Long.parseLong(secPhoneTextF.getText());
+        secStaff.put("Phone",phone);
+        secStaff.put("Email",secEmailTextF.getText());
+        db.securityStaff.insertOne(secStaff);
+        
+        JOptionPane.showMessageDialog(this,"Security personel Information Created");
+        tableUpdate();
+        clearFields();
+        }
     }//GEN-LAST:event_secCreateButtonActionPerformed
+
+    private void secViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secViewButtonActionPerformed
+        // TODO add your handling code here:
+         int selectedIndex= secTable.getSelectedRow();
+        if (selectedIndex<0) {
+            JOptionPane.showMessageDialog(this, "Select a row to view details");
+        }
+        else{
+        Document dc = selectedRowData(selectedIndex);
+        resetFields(dc);
+       }
+    }//GEN-LAST:event_secViewButtonActionPerformed
+
+    private void secUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secUpdateButtonActionPerformed
+        // TODO add your handling code here:
+        String check = "";
+  String selected= secUserIdTextF.getText();
+        if (selected.equals(check)) {
+            JOptionPane.showMessageDialog(this, "Please view the data to update");
+        }
+       else{
+       long Phone = Long.parseLong(secPhoneTextF.getText());
+         db.securityStaff.updateOne(
+              eq("UserId",secUserIdTextF.getText()),
+                combine(set("Name",secNameTextF.getText()), set("Password", secPasswordTextF.getText()),
+                        set("Phone",Phone), set("Email",secEmailTextF.getText())));
+        tableUpdate();
+        JOptionPane.showMessageDialog(this,"Update Successful");
+        clearFields();
+        }
+    }//GEN-LAST:event_secUpdateButtonActionPerformed
+
+    private void secDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secDeleteButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedIndex= secTable.getSelectedRow();
+        if (selectedIndex<0) {
+            JOptionPane.showMessageDialog(this, "Select a row to delete");
+        }
+        else{
+        String value = secTable.getValueAt(selectedIndex, 0).toString();
+        db.securityStaff.deleteOne(eq("UserId",value));
+        tableUpdate();
+        JOptionPane.showMessageDialog(this,"Selected row is deleted");
+        clearFields();
+        }
+    }//GEN-LAST:event_secDeleteButtonActionPerformed
+
+    private void secCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secCancelButtonActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+        tableUpdate();
+    }//GEN-LAST:event_secCancelButtonActionPerformed
+
+    private void secSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secSearchButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_secSearchButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton secCancelButton;
     private javax.swing.JButton secCreateButton;
     private javax.swing.JButton secDeleteButton;
     private javax.swing.JLabel secEmailLabel;
@@ -241,6 +407,7 @@ public class secPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane secScrollPane;
     private javax.swing.JButton secSearchButton;
     private javax.swing.JTextField secSearchTextF;
+    private javax.swing.JTable secTable;
     private javax.swing.JButton secUpdateButton;
     private javax.swing.JLabel secUserIDLabel;
     private javax.swing.JTextField secUserIdTextF;

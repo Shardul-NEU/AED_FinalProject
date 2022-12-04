@@ -20,19 +20,17 @@ import javax.swing.table.DefaultTableModel;
  */
 public class mainPanel extends javax.swing.JPanel {
 
-    /**
+
+/**
      * Creates new form mainPanel
      */
-    Venue venue;
-
-    //creates a new db connection
+        //creates a new db connection
     database db = new database();
-    
-    String check = "Added this line for checking commit health";
 
     // code to update the table on the page
-    String[] columnNames = {"UserId", "Name", "Phone", "Email"};
-    private void tableUpdate(String[] columnNames){
+    
+    private void tableUpdate(){
+        String[] columnNames = {"UserId", "Name", "Phone", "Email"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         MongoCursor<Document> cursor = db.maintenanceStaff.find().iterator();
         while (cursor.hasNext()) {
@@ -49,9 +47,8 @@ public class mainPanel extends javax.swing.JPanel {
 
     public mainPanel(Venue venue) {
         initComponents();
-        this.venue = venue;
 
-        tableUpdate(columnNames);
+        tableUpdate();
     }
     
     //method to clear text fields in the page
@@ -81,7 +78,7 @@ public class mainPanel extends javax.swing.JPanel {
         return result;
     }
     
-    private void resetTable(Document dc){
+    private void resetFields(Document dc){
         mainUserIdTextF.setText(dc.getString("UserId"));
         mainNameTextF.setText(dc.getString("Name"));
         mainPasswordTextF.setText(dc.getString("Password"));
@@ -116,6 +113,7 @@ public class mainPanel extends javax.swing.JPanel {
         mainViewButton = new javax.swing.JButton();
         secScrollPane = new javax.swing.JScrollPane();
         mainTable = new javax.swing.JTable();
+        mainCancelButton = new javax.swing.JButton();
 
         mainNameTextF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +147,11 @@ public class mainPanel extends javax.swing.JPanel {
         mainUserIDLabel.setText("User ID");
 
         mainSearchButton.setText("Search");
+        mainSearchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainSearchButtonActionPerformed(evt);
+            }
+        });
 
         mainPasswordLabel.setText("Password");
 
@@ -207,50 +210,62 @@ public class mainPanel extends javax.swing.JPanel {
         mainTable.getTableHeader().setReorderingAllowed(false);
         secScrollPane.setViewportView(mainTable);
 
+        mainCancelButton.setText("Cancel");
+        mainCancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mainCancelButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(64, 64, 64)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mainCreateButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(mainViewButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(mainUpdateButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(mainDeleteButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(mainSearchTextF, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mainSearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mainHedingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(mainEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(mainEmailTextF))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(mainPhoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(mainPhoneTextF))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(mainUserIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(mainUserIdTextF, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mainNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(mainPasswordLabel))
+                                .addComponent(mainSearchTextF, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mainSearchButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(mainCreateButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(mainViewButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(mainUpdateButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(mainDeleteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mainCancelButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(mainEmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(mainEmailTextF))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(mainPhoneLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(mainPhoneTextF))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(mainUserIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(mainUserIdTextF, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(mainNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(mainPasswordLabel))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(mainPasswordTextF)
+                                            .addComponent(mainNameTextF))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(mainPasswordTextF)
-                                    .addComponent(mainNameTextF))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(secScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(mainHedingLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(secScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 79, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -290,7 +305,8 @@ public class mainPanel extends javax.swing.JPanel {
                     .addComponent(mainCreateButton)
                     .addComponent(mainViewButton)
                     .addComponent(mainDeleteButton)
-                    .addComponent(mainUpdateButton))
+                    .addComponent(mainUpdateButton)
+                    .addComponent(mainCancelButton))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -305,26 +321,32 @@ public class mainPanel extends javax.swing.JPanel {
 
     private void mainCreateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainCreateButtonActionPerformed
         // TODO add your handling code here:
-        venue.setMainId(mainUserIdTextF.getText());
-        venue.setMainName(mainNameTextF.getText());
-        venue.setMainPassword(mainPasswordTextF.getText());
-        long phone = Long.parseLong(mainPhoneTextF.getText());
-        //venue.setMainPhone(phone);
-        venue.setMainEmail(mainEmailTextF.getText()); 
+//        venue.setMainId(mainUserIdTextF.getText());
+//        venue.setMainName(mainNameTextF.getText());
+//        venue.setMainPassword(mainPasswordTextF.getText());
+//        long phone = Long.parseLong(mainPhoneTextF.getText());
+//        //venue.setMainPhone(phone);
+//        venue.setMainEmail(mainEmailTextF.getText()); 
         
-        
+        String check ="";
+        String selected= mainUserIdTextF.getText();
+        if (selected.equals(check)) {
+            JOptionPane.showMessageDialog(this, "Create Unsuccessful : Blank Fields Found");
+        }
+        else {
         Document mainStaff = new Document();
         mainStaff.put("UserId",mainUserIdTextF.getText());
         mainStaff.put("Name",mainNameTextF.getText());
         mainStaff.put("Password",mainPasswordTextF.getText());
+        long phone = Long.parseLong(mainPhoneTextF.getText());
         mainStaff.put("Phone",phone);
         mainStaff.put("Email",mainEmailTextF.getText());
         db.maintenanceStaff.insertOne(mainStaff);
         
-        JOptionPane.showMessageDialog(this,"Security personel Information Created");
-        tableUpdate(columnNames);
+        JOptionPane.showMessageDialog(this,"Maintenance Staff Information Created");
+        tableUpdate();
         clearFields();
-        
+        }
     }//GEN-LAST:event_mainCreateButtonActionPerformed
 
     private void mainUserIdTextFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUserIdTextFActionPerformed
@@ -337,34 +359,68 @@ public class mainPanel extends javax.swing.JPanel {
         if (selectedIndex<0) {
             JOptionPane.showMessageDialog(this, "Select a row to view details");
         }
+        else{
         Document dc = selectedRowData(selectedIndex);
-        resetTable(dc);
-        
+        resetFields(dc);
+       }
     }//GEN-LAST:event_mainViewButtonActionPerformed
 
     private void mainUpdateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainUpdateButtonActionPerformed
   // TODO add your handling code here:
-       String userId = mainUserIdTextF.getText();
-       long Phone = 93939939343L;
+  String check = "";
+  String selected= mainUserIdTextF.getText();
+        if (selected.equals(check)) {
+            JOptionPane.showMessageDialog(this, "Please view the data to update");
+        }
+       else{
+       long Phone = Long.parseLong(mainPhoneTextF.getText());
          db.maintenanceStaff.updateOne(
-              eq("UserId","Adam"),
-                combine(set("Name","Roshan"), set("Password", "JustChanged"),
-                        set("Phone",Phone), set("Email","changedtwice@gmail.com")));
-        tableUpdate(columnNames);
-             
-        
+              eq("UserId",mainUserIdTextF.getText()),
+                combine(set("Name",mainNameTextF.getText()), set("Password", mainPasswordTextF.getText()),
+                        set("Phone",Phone), set("Email",mainEmailTextF.getText())));
+        tableUpdate();
+        JOptionPane.showMessageDialog(this,"Update Successful");
+        clearFields();
+        }
     }//GEN-LAST:event_mainUpdateButtonActionPerformed
 
     private void mainDeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainDeleteButtonActionPerformed
         // TODO add your handling code here:
+        int selectedIndex= mainTable.getSelectedRow();
+        if (selectedIndex<0) {
+            JOptionPane.showMessageDialog(this, "Select a row to delete");
+        }
+        else{
+        String value = mainTable.getValueAt(selectedIndex, 0).toString();
+        db.maintenanceStaff.deleteOne(eq("UserId",value));
+        tableUpdate();
+        JOptionPane.showMessageDialog(this,"Selected row is deleted");
+        clearFields();
+        }
     }//GEN-LAST:event_mainDeleteButtonActionPerformed
 
     private void mainNameTextFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainNameTextFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_mainNameTextFActionPerformed
 
+    private void mainCancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainCancelButtonActionPerformed
+        // TODO add your handling code here:
+        clearFields();
+        tableUpdate();
+    }//GEN-LAST:event_mainCancelButtonActionPerformed
+
+    private void mainSearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mainSearchButtonActionPerformed
+//        // TODO add your handling code here:
+//        String example = "ksjs";
+//        MongoCursor<Document> cursor = db.maintenanceStaff.find(Filters.text(example)).iterator();
+//        while(cursor.hasNext())
+////        Object doc = db.maintenanceStaff.find(Filters.text(example));
+//        System.out.println(doc);
+    }//GEN-LAST:event_mainSearchButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton mainCancelButton;
     private javax.swing.JButton mainCreateButton;
     private javax.swing.JButton mainDeleteButton;
     private javax.swing.JLabel mainEmailLabel;
