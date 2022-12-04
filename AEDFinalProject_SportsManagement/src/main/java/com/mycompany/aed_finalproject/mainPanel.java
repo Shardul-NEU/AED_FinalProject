@@ -27,6 +27,8 @@ public class mainPanel extends javax.swing.JPanel {
 
     //creates a new db connection
     database db = new database();
+    
+    String check = "Added this line for checking commit health";
 
     // code to update the table on the page
     String[] columnNames = {"UserId", "Name", "Phone", "Email"};
