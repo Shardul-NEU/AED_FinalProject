@@ -17,13 +17,15 @@ import org.bson.Document;
  */
 public class AED_FinalProject {
     
-    public static class database{
-        MongoClient client = MongoClients.create("mongodb+srv://suraj:7021072380@cluster0.ehrr7jd.mongodb.net/?retryWrites=true&w=majority");
-        MongoDatabase database = client.getDatabase("SportsManagement");
-        MongoCollection<Document> admin = database.getCollection("admin");
-        MongoCollection<Document> maintenanceStaff = database.getCollection("maintenanceStaff");
-        MongoCollection<Document> securityStaff = database.getCollection("securityStaff");
-    }
+//    public static class database{
+//        MongoClient client = MongoClients.create("mongodb+srv://suraj:7021072380@cluster0.ehrr7jd.mongodb.net/?retryWrites=true&w=majority");
+//        MongoDatabase database = client.getDatabase("SportsManagement");
+//        MongoCollection<Document> admin = database.getCollection("admin");
+//        MongoCollection<Document> maintenanceStaff = database.getCollection("maintenanceStaff");
+//        MongoCollection<Document> securityStaff = database.getCollection("securityStaff");
+//        MongoCollection<Document> secShift = database.getCollection("secShift");
+//        MongoCollection<Document> mainShift = database.getCollection("mainShift");
+//    }
 
     public static void main(String[] args) {
         
@@ -36,7 +38,7 @@ public class AED_FinalProject {
 //      Iterator it = iterDoc.iterator();
 //      while (it.hasNext()) {
 //         System.out.println(it.next());
-         VenuePageFrame frame = new VenuePageFrame();
+         PageFrame frame = new PageFrame();
         frame.setVisible(true);
     }
     }

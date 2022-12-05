@@ -2,17 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.aed_finalproject;
+package Venue;
 
 import Model.Venue;
+import Model.database;
 import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.combine;
 import static com.mongodb.client.model.Updates.set;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import com.mycompany.aed_finalproject.AED_FinalProject.database;
 import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
@@ -25,8 +27,8 @@ public class mainPanel extends javax.swing.JPanel {
      * Creates new form mainPanel
      */
         //creates a new db connection
-    database db = new database();
-
+    database db = new database(); 
+    
     // code to update the table on the page
     
     private void tableUpdate(){

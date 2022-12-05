@@ -4,24 +4,25 @@
  */
 package com.mycompany.aed_finalproject;
 
+import Venue.secPanel;
+import Venue.mainPanel;
 import Model.Venue;
-import com.mycompany.aed_finalproject.AED_FinalProject.database;
+import Venue.shiftsPanel;
 
 /**
  *
  * @author Shardul
  */
-public class VenuePageFrame extends javax.swing.JFrame {
+public class PageFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainPageFrame
      */
     Venue venue;
-    public VenuePageFrame() {
+    public PageFrame() {
         initComponents();
         venue = new Venue();
     }
-    database db = new database();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,6 +129,8 @@ public class VenuePageFrame extends javax.swing.JFrame {
 
     private void shiftButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shiftButtonActionPerformed
         // TODO add your handling code here:
+        shiftsPanel shiftPanel = new shiftsPanel(venue);
+        venSplitPane.setRightComponent(shiftPanel);
     }//GEN-LAST:event_shiftButtonActionPerformed
 
     /**
@@ -147,21 +150,23 @@ public class VenuePageFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VenuePageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VenuePageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VenuePageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VenuePageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PageFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VenuePageFrame().setVisible(true);
+                new PageFrame().setVisible(true);
             }
         });
     }

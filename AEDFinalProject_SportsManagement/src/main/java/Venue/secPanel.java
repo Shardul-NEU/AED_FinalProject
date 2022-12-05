@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.mycompany.aed_finalproject;
+package Venue;
 
 import Model.Venue;
+import Model.database;
 import com.mongodb.client.MongoCursor;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Updates.combine;
 import static com.mongodb.client.model.Updates.set;
 import javax.swing.JOptionPane;
 import org.bson.Document;
-import com.mycompany.aed_finalproject.AED_FinalProject.database;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -336,7 +336,7 @@ public class secPanel extends javax.swing.JPanel {
 
     private void secViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secViewButtonActionPerformed
         // TODO add your handling code here:
-         int selectedIndex= secTable.getSelectedRow();
+        int selectedIndex= secTable.getSelectedRow();
         if (selectedIndex<0) {
             JOptionPane.showMessageDialog(this, "Select a row to view details");
         }
