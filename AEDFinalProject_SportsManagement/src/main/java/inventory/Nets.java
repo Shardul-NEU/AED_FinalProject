@@ -17,22 +17,22 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
-public class Jersey extends javax.swing.JFrame {
+public class Nets extends javax.swing.JFrame {
 
     /**
-     * Creates new form Jersey
+     * Creates new form Nets
      */
-    
     ArrayList<Document> orders;
-    Document jerseyDoc;
+    Document netsDoc;
     String name;
     int count;
     String brand;
-    public Jersey() {
+    
+    public Nets() {
         initComponents();
         setVisible(true);
         
-        jerseyDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "jersey", "inventory");
+        netsDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "jersey", "inventory");
         
         orders = (ArrayList<Document>) jerseyDoc.get("orders");
         
@@ -40,7 +40,7 @@ public class Jersey extends javax.swing.JFrame {
         totalOrders();
         fillOrdertable();
     }
-
+    
     public void totalOrders(){
     
         rrCount.setText(orders.size()+"");
@@ -67,6 +67,7 @@ public class Jersey extends javax.swing.JFrame {
         
         
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +92,7 @@ public class Jersey extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(232, 243, 214));
 
-        jLabel1.setText("Jersey Inventory");
+        jLabel1.setText("Nets Inventory");
         jLabel1.setFont(new Font("Serif", Font.PLAIN, 25));
 
         jLabel2.setText("Total Inventory");

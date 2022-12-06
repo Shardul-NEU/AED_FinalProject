@@ -9,6 +9,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import inventory.Inventory;
 import org.bson.Document;
 
 /**
@@ -38,8 +39,9 @@ public class AED_FinalProject {
 //      Iterator it = iterDoc.iterator();
 //      while (it.hasNext()) {
 //         System.out.println(it.next());
-         PageFrame frame = new PageFrame();
-        frame.setVisible(true);
+//         PageFrame frame = new PageFrame();
+        new Inventory();
+//        frame.setVisible(true);
     }
     }
     

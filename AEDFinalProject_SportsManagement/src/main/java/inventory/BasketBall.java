@@ -37,6 +37,8 @@ public class BasketBall extends javax.swing.JPanel {
         shoes = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/shoes.jpeg")));
         //BufferedImage myPicture = ImageIO.read(new File("ictures/basketball.jpeg"));
         jersey = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/jersey.jpeg")));
+        //BufferedImage myPicture = ImageIO.read(new File("ictures/basketball.jpeg"));
+        nets = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/nets.jpeg")));
 
         setBackground(new java.awt.Color(232, 243, 214));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -81,7 +83,15 @@ public class BasketBall extends javax.swing.JPanel {
                 jerseyMouseClicked(evt);
             }
         });
-        add(jersey, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, 176, 168));
+        add(jersey, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 590, 176, 168));
+
+        nets.setText("v");
+        nets.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                netsMouseClicked(evt);
+            }
+        });
+        add(nets, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, 176, 168));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBoardMouseClicked
@@ -115,11 +125,18 @@ public class BasketBall extends javax.swing.JPanel {
         jersey.setDefaultCloseOperation(1);
     }//GEN-LAST:event_jerseyMouseClicked
 
+    private void netsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_netsMouseClicked
+        // TODO add your handling code here:
+        Nets nets = new Nets();
+        nets.setDefaultCloseOperation(1);
+    }//GEN-LAST:event_netsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backBoard;
     private javax.swing.JLabel ball1;
     private javax.swing.JLabel jersey;
+    private javax.swing.JLabel nets;
     private javax.swing.JLabel ringsandrims1;
     private javax.swing.JLabel shoes;
     // End of variables declaration//GEN-END:variables
