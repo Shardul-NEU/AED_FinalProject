@@ -32,9 +32,9 @@ public class Nets extends javax.swing.JFrame {
         initComponents();
         setVisible(true);
         
-        netsDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "jersey", "inventory");
+        netsDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "nets", "inventory");
         
-        orders = (ArrayList<Document>) jerseyDoc.get("orders");
+        orders = (ArrayList<Document>) netsDoc.get("orders");
         
        
         totalOrders();
@@ -211,15 +211,15 @@ public class Nets extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
 
-        NewOrder newOrder = new NewOrder("jersey", "basketball");
+        NewOrder newOrder = new NewOrder("nets", "basketball");
         newOrder.show();
         newOrder.setDefaultCloseOperation(1);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         // TODO add your handling code here:
-        jerseyDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "jersey", "inventory");
-        orders = (ArrayList<Document>) jerseyDoc.get("orders");
+        netsDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "nets", "inventory");
+        orders = (ArrayList<Document>) netsDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_refreshBtnMouseClicked
@@ -227,7 +227,7 @@ public class Nets extends javax.swing.JFrame {
     private void deleteOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteOrderMouseClicked
         // TODO add your handling code here:
 
-        ArrayList<Document> arr =  (ArrayList<Document>) jerseyDoc.get("orders");
+        ArrayList<Document> arr =  (ArrayList<Document>) netsDoc.get("orders");
         int j = -1;
         for(int i = 0; i< arr.size(); i++){
 
@@ -248,7 +248,7 @@ public class Nets extends javax.swing.JFrame {
             arr.remove(j);
         }
 
-        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "jersey", "inventory").get("_id");
+        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "nets", "inventory").get("_id");
 
         int result = new CRUDDatabase().deleteFomArray(id, arr, "orders", "inventory");
 
@@ -263,7 +263,7 @@ public class Nets extends javax.swing.JFrame {
                 "Order delete",
                 JOptionPane.ERROR_MESSAGE);
         }
-        orders = (ArrayList<Document>) jerseyDoc.get("orders");
+        orders = (ArrayList<Document>) netsDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_deleteOrderMouseClicked

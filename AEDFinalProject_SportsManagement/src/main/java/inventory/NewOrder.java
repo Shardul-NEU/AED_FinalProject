@@ -66,6 +66,10 @@ public class NewOrder extends javax.swing.JFrame {
                 String[]  jerseyBrand = {"Nike", "Puma", "Under Armour", "Old Navy"};
                 loopBrands(jerseyBrand);
                 break;
+            case "nets":
+                String[]  netsBrand = {"ProSlam", "Champion", "Wilson", "Neijiang"};
+                loopBrands(netsBrand);
+                break;
             
             default:
                 throw new AssertionError();
