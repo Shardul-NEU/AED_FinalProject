@@ -17,32 +17,30 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
-
-public class Helmet extends javax.swing.JFrame {
+public class Gloves extends javax.swing.JFrame {
 
     /**
-     * Creates new form Helmet
+     * Creates new form Gloves
      */
     ArrayList<Document> orders;
-    Document helmetDoc;
+    Document gloveDoc;
     String name;
     int count;
     String brand;
     
-    public Helmet() {
+    public Gloves() {
         initComponents();
         
         setVisible(true);
         
-        helmetDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "helmet", "inventory");
+        gloveDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "gloves", "inventory");
         
-        orders = (ArrayList<Document>) helmetDoc.get("orders");
+        orders = (ArrayList<Document>) gloveDoc.get("orders");
         
        
         totalOrders();
         fillOrdertable();
     }
-    
     
     
     public void totalOrders(){
@@ -96,7 +94,7 @@ public class Helmet extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(232, 243, 214));
 
-        jLabel1.setText("Helmet Inventory");
+        jLabel1.setText("Gloves Inventory");
         jLabel1.setFont(new Font("Serif", Font.PLAIN, 25));
 
         jLabel2.setText("Total Inventory");
@@ -215,15 +213,15 @@ public class Helmet extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
 
-        NewOrder newOrder = new NewOrder("helmet", "icehockey");
+        NewOrder newOrder = new NewOrder("gloves", "icehockey");
         newOrder.show();
         newOrder.setDefaultCloseOperation(1);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         // TODO add your handling code here:
-        helmetDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "helmet", "inventory");
-        orders = (ArrayList<Document>) helmetDoc.get("orders");
+        gloveDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "gloves", "inventory");
+        orders = (ArrayList<Document>) gloveDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_refreshBtnMouseClicked
@@ -231,7 +229,7 @@ public class Helmet extends javax.swing.JFrame {
     private void deleteOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteOrderMouseClicked
         // TODO add your handling code here:
 
-        ArrayList<Document> arr =  (ArrayList<Document>) helmetDoc.get("orders");
+        ArrayList<Document> arr =  (ArrayList<Document>) gloveDoc.get("orders");
         int j = -1;
         for(int i = 0; i< arr.size(); i++){
 
@@ -252,7 +250,7 @@ public class Helmet extends javax.swing.JFrame {
             arr.remove(j);
         }
 
-        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "helmet", "inventory").get("_id");
+        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "gloves", "inventory").get("_id");
 
         int result = new CRUDDatabase().deleteFomArray(id, arr, "orders", "inventory");
 
@@ -267,10 +265,11 @@ public class Helmet extends javax.swing.JFrame {
                 "Order delete",
                 JOptionPane.ERROR_MESSAGE);
         }
-        orders = (ArrayList<Document>) helmetDoc.get("orders");
+        orders = (ArrayList<Document>) gloveDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_deleteOrderMouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
