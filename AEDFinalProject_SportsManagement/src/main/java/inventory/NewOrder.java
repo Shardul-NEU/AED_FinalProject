@@ -74,6 +74,10 @@ public class NewOrder extends javax.swing.JFrame {
                 String[]  helmetBrand = {"CCM", "Bauer Prodigy", "Warrior Covert"};
                 loopBrands(helmetBrand);
                 break;
+            case "glove":
+                String[]  gloveBrand = {"Bauer", "CCM", "Warrior Covert", "True"};
+                loopBrands(gloveBrand);
+                break;
             
             default:
                 throw new AssertionError();
