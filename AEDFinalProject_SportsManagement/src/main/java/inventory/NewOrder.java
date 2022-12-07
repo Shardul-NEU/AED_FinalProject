@@ -74,13 +74,25 @@ public class NewOrder extends javax.swing.JFrame {
                 String[]  helmetBrand = {"CCM", "Bauer Prodigy", "Warrior Covert"};
                 loopBrands(helmetBrand);
                 break;
-            case "glove":
+            case "gloves":
                 String[]  gloveBrand = {"Bauer", "CCM", "Warrior Covert", "True"};
                 loopBrands(gloveBrand);
+                break;
+            case "pads":
+                String[]  padsBrand = {"Bauer Vapor", "CCM", "Warrior Aplha"};
+                loopBrands(padsBrand);
                 break;
             case "skates":
                 String[]  skatesBrand = {"Bauer Supreme", "CCM Tasks", "True TF9", "Graf"};
                 loopBrands(skatesBrand);
+                break;
+            case "sticks":
+                String[]  sticksBrand = {"STX", "Graf", "Vaughn", "Easton"};
+                loopBrands(sticksBrand);
+                break;
+            case "guards":
+                String[]  guardBrand = {"Sisu", "Shock", "Under Armour", "NXTRND"};
+                loopBrands(guardBrand);
                 break;
             
             default:

@@ -112,8 +112,8 @@ public class IceHockey extends javax.swing.JPanel {
 
     private void glovesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_glovesMouseClicked
         // TODO add your handling code here:
-        RingsAndRims rr = new RingsAndRims();
-        rr.setDefaultCloseOperation(1);
+        Gloves gloves = new Gloves();
+        gloves.setDefaultCloseOperation(1);
     }//GEN-LAST:event_glovesMouseClicked
 
     private void skatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_skatesMouseClicked
