@@ -94,14 +94,14 @@ public class IceHockey extends javax.swing.JPanel {
 
     private void stickMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stickMouseClicked
         // TODO add your handling code here:
-        Nets nets = new Nets();
-        nets.setDefaultCloseOperation(1);
+        Stick stick = new Stick();
+        stick.setDefaultCloseOperation(1);
     }//GEN-LAST:event_stickMouseClicked
 
     private void mouthGuardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouthGuardMouseClicked
         // TODO add your handling code here:
-        Jersey jersey = new Jersey();
-        jersey.setDefaultCloseOperation(1);
+        Guard guard = new Guard();
+        guard.setDefaultCloseOperation(1);
     }//GEN-LAST:event_mouthGuardMouseClicked
 
     private void padsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_padsMouseClicked
@@ -118,8 +118,8 @@ public class IceHockey extends javax.swing.JPanel {
 
     private void skatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_skatesMouseClicked
         // TODO add your handling code here:
-        Backboard bck = new Backboard();
-        bck.setDefaultCloseOperation(1);
+        Skates skates = new Skates();
+        skates.setDefaultCloseOperation(1);
 
     }//GEN-LAST:event_skatesMouseClicked
 
