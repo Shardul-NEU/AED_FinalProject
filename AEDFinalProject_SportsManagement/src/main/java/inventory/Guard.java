@@ -30,6 +30,7 @@ public class Guard extends javax.swing.JFrame {
     
     public Guard() {
         initComponents();
+        setVisible(true);
         doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "guards", "inventory");
         
         orders = (ArrayList<Document>) doc.get("orders");

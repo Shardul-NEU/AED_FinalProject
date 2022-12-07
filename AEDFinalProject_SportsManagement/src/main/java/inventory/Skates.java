@@ -29,6 +29,7 @@ public class Skates extends javax.swing.JFrame {
     String brand;
     public Skates() {
         initComponents();
+        setVisible(true);
         doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "skates", "inventory");
         
         orders = (ArrayList<Document>) doc.get("orders");

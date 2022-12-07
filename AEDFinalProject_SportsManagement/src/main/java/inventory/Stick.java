@@ -30,6 +30,7 @@ public class Stick extends javax.swing.JFrame {
     
     public Stick() {
         initComponents();
+        setVisible(true);
         doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "sticks", "inventory");
         
         orders = (ArrayList<Document>) doc.get("orders");
