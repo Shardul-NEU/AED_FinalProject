@@ -5,6 +5,7 @@
 package inventory;
 
 import database.CRUDDatabase;
+import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -16,6 +17,7 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
+
 public class Helmet extends javax.swing.JFrame {
 
     /**
@@ -26,9 +28,10 @@ public class Helmet extends javax.swing.JFrame {
     String name;
     int count;
     String brand;
+    
     public Helmet() {
         initComponents();
-        initComponents();
+        
         setVisible(true);
         
         helmetDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "helmet", "inventory");
@@ -39,6 +42,8 @@ public class Helmet extends javax.swing.JFrame {
         totalOrders();
         fillOrdertable();
     }
+    
+    
     
     public void totalOrders(){
     
@@ -138,7 +143,7 @@ public class Helmet extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -174,7 +179,7 @@ public class Helmet extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
+                        .addGap(93, 93, 93)
                         .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()

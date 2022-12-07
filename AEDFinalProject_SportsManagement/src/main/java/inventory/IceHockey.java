@@ -27,115 +27,115 @@ public class IceHockey extends javax.swing.JPanel {
     private void initComponents() {
 
         //BufferedImage myPicture = ImageIO.read(new File("ictures/basketball.jpeg"));
-        nets = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/stick.jpeg")));
+        stick = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/stick.jpeg")));
         //BufferedImage myPicture = ImageIO.read(new File("ictures/basketball.jpeg"));
-        jersey = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/mouthGuard.jpeg")));
+        mouthGuard = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/mouthGuard.jpeg")));
         //BufferedImage myPicture = ImageIO.read(new File("ictures/basketball.jpeg"));
-        shoes = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/pads.jpeg")));
+        pads = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/pads.jpeg")));
         //BufferedImage myPicture = ImageIO.read(new File("ictures/basketball.jpeg"));
-        ringsandrims1 = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/gloves.jpeg")));
+        gloves = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/gloves.jpeg")));
         //BufferedImage myPicture = ImageIO.read(new File("ictures/basketball.jpeg"));
-        backBoard = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/skates.jpeg")));
+        skates = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/skates.jpeg")));
         //BufferedImage myPicture = ImageIO.read(new File("ictures/basketball.jpeg"));
-        ball1 = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/helmet.jpeg")));
+        helmet = new javax.swing.JLabel(new javax.swing.ImageIcon(getClass().getResource("/Pictures/helmet.jpeg")));
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nets.setText("v");
-        nets.addMouseListener(new java.awt.event.MouseAdapter() {
+        stick.setText("v");
+        stick.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                netsMouseClicked(evt);
+                stickMouseClicked(evt);
             }
         });
-        add(nets, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, 176, 168));
+        add(stick, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 590, 176, 168));
 
-        jersey.setText("v");
-        jersey.addMouseListener(new java.awt.event.MouseAdapter() {
+        mouthGuard.setText("v");
+        mouthGuard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jerseyMouseClicked(evt);
+                mouthGuardMouseClicked(evt);
             }
         });
-        add(jersey, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 590, 176, 168));
+        add(mouthGuard, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 590, 176, 168));
 
-        shoes.setText("b");
-        shoes.addMouseListener(new java.awt.event.MouseAdapter() {
+        pads.setText("b");
+        pads.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                shoesMouseClicked(evt);
+                padsMouseClicked(evt);
             }
         });
-        add(shoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 341, 176, 168));
+        add(pads, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 341, 176, 168));
 
-        ringsandrims1.setText("a");
-        ringsandrims1.addMouseListener(new java.awt.event.MouseAdapter() {
+        gloves.setText("a");
+        gloves.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ringsandrims1MouseClicked(evt);
+                glovesMouseClicked(evt);
             }
         });
-        add(ringsandrims1, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 55, 176, 168));
+        add(gloves, new org.netbeans.lib.awtextra.AbsoluteConstraints(442, 55, 176, 168));
 
-        backBoard.setText("a");
-        backBoard.addMouseListener(new java.awt.event.MouseAdapter() {
+        skates.setText("a");
+        skates.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                backBoardMouseClicked(evt);
+                skatesMouseClicked(evt);
             }
         });
-        add(backBoard, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 176, 168));
+        add(skates, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 176, 168));
 
-        backBoard.setSize(80, 80);
-        ball1.setBackground(new java.awt.Color(255, 102, 102));
-        ball1.setText("a");
-        ball1.addMouseListener(new java.awt.event.MouseAdapter() {
+        skates.setSize(80, 80);
+        helmet.setBackground(new java.awt.Color(255, 102, 102));
+        helmet.setText("a");
+        helmet.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ball1MouseClicked(evt);
+                helmetMouseClicked(evt);
             }
         });
-        add(ball1, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 55, 176, 168));
+        add(helmet, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 55, 176, 168));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void netsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_netsMouseClicked
+    private void stickMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_stickMouseClicked
         // TODO add your handling code here:
         Nets nets = new Nets();
         nets.setDefaultCloseOperation(1);
-    }//GEN-LAST:event_netsMouseClicked
+    }//GEN-LAST:event_stickMouseClicked
 
-    private void jerseyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jerseyMouseClicked
+    private void mouthGuardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouthGuardMouseClicked
         // TODO add your handling code here:
         Jersey jersey = new Jersey();
         jersey.setDefaultCloseOperation(1);
-    }//GEN-LAST:event_jerseyMouseClicked
+    }//GEN-LAST:event_mouthGuardMouseClicked
 
-    private void shoesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_shoesMouseClicked
+    private void padsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_padsMouseClicked
         // TODO add your handling code here:
         Shoes shoes = new Shoes();
         shoes.setDefaultCloseOperation(1);
-    }//GEN-LAST:event_shoesMouseClicked
+    }//GEN-LAST:event_padsMouseClicked
 
-    private void ringsandrims1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ringsandrims1MouseClicked
+    private void glovesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_glovesMouseClicked
         // TODO add your handling code here:
         RingsAndRims rr = new RingsAndRims();
         rr.setDefaultCloseOperation(1);
-    }//GEN-LAST:event_ringsandrims1MouseClicked
+    }//GEN-LAST:event_glovesMouseClicked
 
-    private void backBoardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBoardMouseClicked
+    private void skatesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_skatesMouseClicked
         // TODO add your handling code here:
         Backboard bck = new Backboard();
         bck.setDefaultCloseOperation(1);
 
-    }//GEN-LAST:event_backBoardMouseClicked
+    }//GEN-LAST:event_skatesMouseClicked
 
-    private void ball1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ball1MouseClicked
+    private void helmetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helmetMouseClicked
         // TODO add your handling code here:
-        Ball bb = new Ball();
-        bb.setDefaultCloseOperation(1);
-    }//GEN-LAST:event_ball1MouseClicked
+        Helmet helmet = new Helmet();
+        helmet.setDefaultCloseOperation(1);
+    }//GEN-LAST:event_helmetMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel backBoard;
-    private javax.swing.JLabel ball1;
-    private javax.swing.JLabel jersey;
-    private javax.swing.JLabel nets;
-    private javax.swing.JLabel ringsandrims1;
-    private javax.swing.JLabel shoes;
+    private javax.swing.JLabel gloves;
+    private javax.swing.JLabel helmet;
+    private javax.swing.JLabel mouthGuard;
+    private javax.swing.JLabel pads;
+    private javax.swing.JLabel skates;
+    private javax.swing.JLabel stick;
     // End of variables declaration//GEN-END:variables
 }
