@@ -145,6 +145,11 @@ public class NewOrder extends javax.swing.JFrame {
 
         brandsfield.setBackground(new java.awt.Color(255, 251, 235));
         brandsfield.setModel(new javax.swing.DefaultComboBoxModel<>());
+        brandsfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brandsfieldActionPerformed(evt);
+            }
+        });
 
         placeOrderBtn.setBackground(new java.awt.Color(255, 251, 235));
         placeOrderBtn.setText("Place Order");
@@ -246,6 +251,10 @@ public class NewOrder extends javax.swing.JFrame {
             }
             
     }//GEN-LAST:event_placeOrderBtnMouseClicked
+
+    private void brandsfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brandsfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_brandsfieldActionPerformed
 
    
 

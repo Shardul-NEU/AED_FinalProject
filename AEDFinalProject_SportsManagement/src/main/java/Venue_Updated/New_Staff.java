@@ -37,12 +37,13 @@ public class New_Staff extends javax.swing.JFrame {
     /**
      * Creates new form newStaff
      */
-String venue ="marino";
-String staff = "security";
-
+String staff = "";
+String venue = "";
 public New_Staff(String staff, String venue){
     initComponents();
     setVisible(true);
+    this.staff = staff;
+    this.venue = venue;
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -232,7 +233,7 @@ public New_Staff(String staff, String venue){
         BasicDBObject obj = (BasicDBObject)JSON.parse(gson.toJson(marino));
 
         CRUDDatabase db = new CRUDDatabase();
-        Document staffdoc = new CRUDDatabase().getRecordByTwoKeys("venue", this.venue, "staff", this.staff, "venueStaff");
+        Document staffdoc = new CRUDDatabase().getRecordByTwoKeys("venue",venue, "staff", this.staff, "venueStaff");
 
         int result = db.addInArrayById((ObjectId) staffdoc.get("_id"), obj, "staffList", "venueStaff");
 
