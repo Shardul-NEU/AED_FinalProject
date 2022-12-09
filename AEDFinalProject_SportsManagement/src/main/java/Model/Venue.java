@@ -9,130 +9,58 @@ package Model;
  * @author Shardul
  */
 public class Venue {
-    private String secId;
-    private String secName;
-    private String secPassword;
-    private Long secPhone;
-    private String secEmail;
-    private String mainId;
-    private String mainName;
-    private String mainPassword;
-    private Long mainPhone;
-    private String mainEmail;
-    private String courtName;
-    private String courtNumber;
-    private String courtStatus;
-    private String courtHealth;
+    private String userId;
+    private String name;
+    private String password;
+    private long phone;
+    private String email;
 
-    public String getSecId() {
-        return secId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setSecId(String secId) {
-        this.secId = secId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getSecName() {
-        return secName;
+    public String getName() {
+        return name;
     }
 
-    public void setSecName(String secName) {
-        this.secName = secName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSecPassword() {
-        return secPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setSecPassword(String secPassword) {
-        this.secPassword = secPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Long getSecPhone() {
-        return secPhone;
+    public long getPhone() {
+        return phone;
     }
 
-    public void setSecPhone(Long secPhone) {
-        this.secPhone = secPhone;
+    public void setPhone(long phone) {
+        this.phone = phone;
     }
 
-    public String getSecEmail() {
-        return secEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setSecEmail(String secEmail) {
-        this.secEmail = secEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
-    public String getMainId() {
-        return mainId;
+     public Venue(String userId, String name, String password, long phone, String email){
+    
+        this.userId = userId;
+        this.name = name;
+        this.password = password;
+        this.phone = phone;
+        this.email = email;
     }
-
-    public void setMainId(String mainId) {
-        this.mainId = mainId;
-    }
-
-    public String getMainName() {
-        return mainName;
-    }
-
-    public void setMainName(String mainName) {
-        this.mainName = mainName;
-    }
-
-    public String getMainPassword() {
-        return mainPassword;
-    }
-
-    public void setMainPassword(String mainPassword) {
-        this.mainPassword = mainPassword;
-    }
-
-    public Long getMainPhone() {
-        return mainPhone;
-    }
-
-    public void setMainPhone(Long mainPhone) {
-        this.mainPhone = mainPhone;
-    }
-
-    public String getMainEmail() {
-        return mainEmail;
-    }
-
-    public void setMainEmail(String mainEmail) {
-        this.mainEmail = mainEmail;
-    }
-
-    public String getCourtName() {
-        return courtName;
-    }
-
-    public void setCourtName(String courtName) {
-        this.courtName = courtName;
-    }
-
-    public String getCourtNumber() {
-        return courtNumber;
-    }
-
-    public void setCourtNumber(String courtNumber) {
-        this.courtNumber = courtNumber;
-    }
-
-    public String getCourtStatus() {
-        return courtStatus;
-    }
-
-    public void setCourtStatus(String courtStatus) {
-        this.courtStatus = courtStatus;
-    }
-
-    public String getCourtHealth() {
-        return courtHealth;
-    }
-
-    public void setCourtHealth(String courtHealth) {
-        this.courtHealth = courtHealth;
-    }
+    
 }

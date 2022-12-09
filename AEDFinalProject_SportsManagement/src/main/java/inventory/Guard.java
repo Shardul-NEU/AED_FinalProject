@@ -117,6 +117,11 @@ public class Guard extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         refreshBtn.setText("Refresh");
         refreshBtn.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -266,6 +271,10 @@ public class Guard extends javax.swing.JFrame {
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_deleteOrderMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
