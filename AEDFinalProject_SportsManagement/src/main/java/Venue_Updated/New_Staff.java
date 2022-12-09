@@ -38,7 +38,7 @@ public class New_Staff extends javax.swing.JFrame {
      * Creates new form newStaff
      */
 String venue ="marino";
-String staff = "maintenance";
+String staff = "security";
 
 public New_Staff(String staff, String venue){
     initComponents();

@@ -6,6 +6,7 @@
 package com.mycompany.aed_finalproject;
 
 import Venue_Updated.MainStaff;
+import Venue_Updated.SecStaff;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
@@ -42,7 +43,7 @@ public class AED_FinalProject {
 //         System.out.println(it.next());
 //         PageFrame frame = new PageFrame();
         //new Inventory();
-        new MainStaff();
+        new SecStaff();
         
 //        frame.setVisible(true);
     }

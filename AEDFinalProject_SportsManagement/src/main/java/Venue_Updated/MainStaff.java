@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Venue_Updated;
+import Model.Venue;
+import static Model.Venue.filltable;
+import static Model.Venue.totalstaffcount;
 import database.CRUDDatabase;
 import inventory.NewOrder;
 import java.awt.Font;
@@ -37,37 +40,9 @@ public class MainStaff extends javax.swing.JFrame {
         doc = new CRUDDatabase().getRecordByTwoKeys("venue", "marino", "staff", "maintenance", "venueStaff");
         
         staffList = (ArrayList<Document>) doc.get("staffList");
-        totalOrders();
-        fillOrdertable();
+        totalstaffcount(rrCount, staffList);
+        filltable(staffList, ordersTable);
     }
-    
-    public void totalOrders(){
-    
-        rrCount.setText(staffList.size()+"");
-    
-    }
-    
-    public void fillOrdertable(){
-        
-        
-        String[] columnNames = { "UserId", "Name", "Password","Phone", "Email"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0){
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                   //all cells false
-                   return false;
-                };
-        };
-        staffList.forEach(staff ->{
-            
-            model.addRow(new Object[] { staff.get("userId"), staff.get("name"), staff.get("password"), staff.get("phone"), staff.get("email")});
-        });
-        
-        ordersTable.setModel(model);
-        
-        
-    }
-
   
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -208,10 +183,9 @@ public class MainStaff extends javax.swing.JFrame {
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         // TODO add your handling code here:
-        doc = new CRUDDatabase().getRecordByTwoKeys("venue", "marino", "staff", "maintenance", "venueStaff");
-        staffList = (ArrayList<Document>) doc.get("staff");
-        fillOrdertable();
-        totalOrders();
+        ArrayList<Document> staffList = (ArrayList<Document>) doc.get("staff");
+        filltable(staffList, ordersTable);
+        totalstaffcount(rrCount, staffList);
     }//GEN-LAST:event_refreshBtnMouseClicked
 
     private void deleteOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteOrderMouseClicked

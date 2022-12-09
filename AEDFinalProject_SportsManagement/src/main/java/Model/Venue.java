@@ -4,6 +4,12 @@
  */
 package Model;
 
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
+
 /**
  *
  * @author Shardul
@@ -62,5 +68,27 @@ public class Venue {
         this.phone = phone;
         this.email = email;
     }
+     
+    public static void filltable(ArrayList<Document> staffList, JTable ordersTable){
+        String[] columnNames = { "UserId", "Name", "Password","Phone", "Email"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                   //all cells false
+                   return false;
+                };
+        };
+        staffList.forEach(staff ->{
+            
+            model.addRow(new Object[] { staff.get("userId"), staff.get("name"), staff.get("password"), staff.get("phone"), staff.get("email")});
+        });
+        
+        ordersTable.setModel(model);
+    }
+    
+    public static void totalstaffcount(JLabel rrCount, ArrayList<Document> staffList ){
+        rrCount.setText(staffList.size()+"");
+    }
+    
     
 }
