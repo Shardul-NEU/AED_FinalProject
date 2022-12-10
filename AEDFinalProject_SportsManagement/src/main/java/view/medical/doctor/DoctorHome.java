@@ -27,7 +27,7 @@ public class DoctorHome extends javax.swing.JFrame {
         setResizable(false);
         setVisible(true);
         
-        docSer.fillDatetable();
+        docSer.returnDateSortedData();
         
     }
 

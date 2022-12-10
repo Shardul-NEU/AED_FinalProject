@@ -11,6 +11,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import view.inventory.Inventory;
+import view.medical.doctor.DoctorHome;
 
 /**
  *
@@ -40,7 +41,8 @@ public class AED_FinalProject {
 //      while (it.hasNext()) {
 //         System.out.println(it.next());
 //         PageFrame frame = new PageFrame();
-           new Inventory();
+//           new Inventory();
+        new DoctorHome();
 //        frame.setVisible(true);
     }
     }
