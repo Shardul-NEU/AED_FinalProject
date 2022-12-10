@@ -4,8 +4,8 @@
  */
 package services;
 
-import com.mongodb.client.MongoDatabase;
-import database.CRUDDatabase;
+import enums.ROLES;
+import java.util.List;
 import model.ActiveUser;
 import repository.*;
 import model.User;
@@ -38,7 +38,16 @@ public class UserService {
     }
     
      public User updateUser(User user){
-        return this.repository.createUser(user);
+        int rowsUpdate= this.repository.updateUserInfo(user);
+        if(rowsUpdate < 1){
+            return null;
+        }
+        return user;
         
     }
+     
+     public List<ROLES> getUniqueRoles(){
+          return this.repository.getUniqueRoles();
+     }
 }
+

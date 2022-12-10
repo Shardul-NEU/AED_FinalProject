@@ -4,15 +4,24 @@
  */
 package repository;
 
+import com.mongodb.MongoException;
+import com.mongodb.client.DistinctIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
 import database.CRUDDatabase;
 import database.DataBaseConnection;
 import enums.ROLES;
+import java.util.ArrayList;
+import java.util.List;
 import model.User;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 /**
  *
  * @author Shardul
@@ -36,7 +45,9 @@ public class UserRepository {
         }
         Document doc=document.find(Filters.and(Filters.eq(userField,username), Filters.eq(passwordField,password))).first();
         if(doc!=null){
-            return new User(doc.getString("name"), doc.getString("email"),ROLES.getRoles(doc.getString("role")), doc.getInteger("height"),doc.getInteger("weight"),doc.getString("phone"), username, password);
+            User user= new User(doc.getString("name"), doc.getString("email"),ROLES.getRoles(doc.getString("role")), doc.getInteger("height"),doc.getInteger("weight"),doc.getString("phone"), username, password);
+            user.setId(doc.getObjectId("_id"));
+            return user;
         }
         return null;
     }
@@ -49,7 +60,9 @@ public class UserRepository {
         }
         Document doc=document.find(Filters.and(Filters.eq(userField,username))).first();
         if(doc!=null){
-            return new User(doc.getString("name"), doc.getString("email"),ROLES.getRoles(doc.getString("role")), doc.getInteger("height"),doc.getInteger("weight"),doc.getString("phone"), username, doc.getString("password"));
+            User user=new User(doc.getString("name"), doc.getString("email"),ROLES.getRoles(doc.getString("role")), doc.getInteger("height"),doc.getInteger("weight"),doc.getString("phone"), username, doc.getString("password"));
+            user.setId(doc.getObjectId("_id"));
+            return user;
         }
         return null;
     }
@@ -65,22 +78,66 @@ public class UserRepository {
         doc.append("weight", user.getWeight());
         doc.append("username", user.getUsername());
         doc.append("password", user.getPassword());
-        doc.append("role", user.getRoles());
+        doc.append("role", user.getRoles().toString());
         this.crud.insertDocument(doc, SCHEMANAME);
         return user;
     }
     
-    public User updateUserInfo(User user){
+    public int updateUserInfo(User user){
         Document doc= new Document();
-        doc.append("name", user.getName());
-        doc.append("email",user.getEmail());
-        doc.append("phone", user.getPhoneNumber());
-        doc.append("height", user.getHeight());
-        doc.append("weight", user.getWeight());
-        doc.append("username", user.getUsername());
-        doc.append("password", user.getPassword());
-        doc.append("role", user.getRoles());
-        this.crud.insertDocument(doc, SCHEMANAME);
-        return user;
+        
+        User exisitingUser=this.fetchUserByUserName(user.getUsername());
+        if(user.getName()==null) user.setName(exisitingUser.getName());
+        if(user.getEmail()==null) user.setEmail(exisitingUser.getEmail());
+        if(user.getWeight()==null) user.setWeight(exisitingUser.getWeight());
+        if(user.getHeight()==null) user.setHeight(exisitingUser.getHeight());
+        if(user.getPhoneNumber()==null) user.setPhoneNumber(exisitingUser.getPhoneNumber());
+        if(user.getUsername()==null) user.setUsername(exisitingUser.getUsername());
+        if(user.getPassword()==null) user.setPassword(exisitingUser.getPassword());
+        if(user.getRoles()==null) user.setRoles(exisitingUser.getRoles());
+        
+         Document query = new Document().append("_id", exisitingUser.getId()  );
+        Bson updates = Updates.combine(
+                Updates.set("name", user.getName()),
+        Updates.set("email",user.getEmail()),
+        Updates.set("phone", user.getPhoneNumber()),
+        Updates.set("height", user.getHeight()),
+        Updates.set("weight", user.getWeight()),
+        Updates.set("username", user.getUsername()),
+        Updates.set("password", user.getPassword()),
+        Updates.set("role", user.getRoles().toString()));
+        
+        UpdateOptions options = new UpdateOptions().upsert(false);
+        UpdateResult result = null;
+        try {
+             result= this.crud.getCollection(SCHEMANAME).updateOne(query, updates, options);
+        } catch (MongoException me) {
+            me.printStackTrace();
+            System.err.println("Unable to update due to an error: " + me);
+        }
+        
+        if(result != null ){
+            return (int) result.getModifiedCount();
+        }
+        return -1;
+    }
+    
+    
+    
+    public List<ROLES> getUniqueRoles(){
+      
+        List<ROLES> rolesList= new ArrayList<ROLES>();
+        try {
+              MongoCollection<Document> document= this.crud.getCollection(SCHEMANAME);
+        DistinctIterable<String> iter=document.distinct("role", String.class);
+        MongoCursor<String> results = iter.iterator();
+        while(results.hasNext()){
+            ROLES rol= ROLES.getRoles(results.next());
+            rolesList.add(rol);
+        }
+            } catch (MongoException me) {
+                System.err.println("An error occurred: " + me);
+            }
+        return rolesList;
     }
 }

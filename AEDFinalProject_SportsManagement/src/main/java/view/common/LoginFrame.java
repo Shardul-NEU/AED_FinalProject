@@ -14,7 +14,7 @@ import view.players.HomePageFrame;
 
 /**
  *
- * @author priyankakhimyani
+ * @author Shardul
  */
 public class LoginFrame extends javax.swing.JFrame {
     

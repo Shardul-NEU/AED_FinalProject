@@ -5,7 +5,10 @@
 package view.players.panel;
 
 import enums.ROLES;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.stream.Stream;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -19,16 +22,38 @@ import services.UserService;
 public class UpdateProfilePanel extends javax.swing.JPanel {
     
     private UserService userService;
+    private List<String> rolesArr;
     /**
      * Creates new form UpdateProfilePanel
      */
     public UpdateProfilePanel(User user) {
         initComponents();
+        this.userService= new UserService();
+        populateRolesDropDown();
         if(user!=null){
             populateDefaultValues(user);
+            
         }
+        setOperationList(user!=null);
     }
     
+    private void setOperationList(Boolean isUpdate){
+        addBtn.setVisible(!isUpdate);
+            updateBtn.setVisible(isUpdate);
+        
+    }
+    /*
+    Fetch unique roles from database
+    */
+    public void populateRolesDropDown(){
+        List<ROLES> roles= this.userService.getUniqueRoles();
+        rolesArr= new ArrayList<String>();
+        roles.stream().forEach((r)->rolesArr.add(r.toString()));
+        String str[]= new String[roles.size()];
+        roleComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(rolesArr.toArray(str)));
+
+        
+    }
     public void populateDefaultValues(User user){
         nameTF.setText(user.getName());
         emailTf.setText(user.getEmail());
@@ -72,7 +97,7 @@ public class UpdateProfilePanel extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         emailTf = new javax.swing.JTextField();
         passwordTF = new javax.swing.JPasswordField();
-        jButton3 = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         phoneNumberTF = new javax.swing.JTextField();
 
@@ -107,10 +132,10 @@ public class UpdateProfilePanel extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setText("Add");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setText("Add");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
 
@@ -146,7 +171,7 @@ public class UpdateProfilePanel extends javax.swing.JPanel {
                 .addGap(160, 160, 160)
                 .addComponent(updateBtn)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(addBtn)
                 .addContainerGap(192, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -192,7 +217,7 @@ public class UpdateProfilePanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(updateBtn)
-                    .addComponent(jButton3))
+                    .addComponent(addBtn))
                 .addGap(59, 59, 59))
         );
 
@@ -218,23 +243,15 @@ public class UpdateProfilePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         try{
-            String name= nameTF.getText();
-        String email=emailTf.getText();
-        Integer height= Integer.valueOf(heightTF.getText());
-        Integer weight= Integer.valueOf(weightTF.getText());
-        String password= passwordTF.getText();
-        String roles= (String)roleComboBox.getSelectedItem();
-        String username=usernameTf.getText();
-        String phone= phoneNumberTF.getText();
-        User user= new User(name, email, ROLES.valueOf("roles"), height, weight, phone, username, password);
-        user=this.userService.insertUser(user);
+           User user=this.getUserObjectFromUI();
+        user=this.userService.updateUser(user);
         if(user==null){
 //            error while updating information
             JOptionPane.showMessageDialog(new JFrame(), "Error while updating user information", "Dialog",
         JOptionPane.ERROR_MESSAGE);
         }else{
             JOptionPane.showMessageDialog(new JFrame(), "User profile updated", "Dialog",
-        JOptionPane.OK_OPTION);
+        JOptionPane.INFORMATION_MESSAGE);
         }
         }catch(Exception e){
             //error while updating information
@@ -248,15 +265,37 @@ public class UpdateProfilePanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordTFActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        User user= this.getUserObjectFromUI();
+        try{
+            this.userService.insertUser(user);
+        JOptionPane.showMessageDialog(new JFrame(), "User profile updated", "Dialog",
+        JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(new JFrame(), "Opps!! Update failed", "Dialog",
+        JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_addBtnActionPerformed
 
+    public User getUserObjectFromUI(){
+         String name= nameTF.getText();
+        String email=emailTf.getText();
+        Integer height= Integer.valueOf(heightTF.getText());
+        Integer weight= Integer.valueOf(weightTF.getText());
+        String password= passwordTF.getText();
+        String roles= (String)roleComboBox.getSelectedItem();
+        String username=usernameTf.getText();
+        String phone= phoneNumberTF.getText();
+        return new User(name, email, ROLES.getRoles(roles), height, weight, phone, username, password);
+       
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBtn;
     private javax.swing.JTextField emailTf;
     private javax.swing.JTextField heightTF;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

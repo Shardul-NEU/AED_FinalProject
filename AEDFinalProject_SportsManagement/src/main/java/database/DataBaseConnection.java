@@ -33,7 +33,6 @@ public class DataBaseConnection {
         CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                                              pojoCodecRegistry);
         
-        
         MongoClientSettings clientSettings;
         clientSettings = MongoClientSettings.builder()
                 .applyConnectionString(connectionString)

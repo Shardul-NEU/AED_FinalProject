@@ -7,7 +7,7 @@ package enums;
 
 /**
  *
- * @author priyankakhimyani
+ * @author Shardul
  */
 public enum ROLES {
     PLAYER("player"),
@@ -28,6 +28,7 @@ public enum ROLES {
             case "coach": return ROLES.COACH;
             case "teammanager": return ROLES.TEAMMANAGER;
             case "player": return ROLES.PLAYER;
+            case "doctor": return ROLES.DOCTOR;
             default:
                 return null;
         }

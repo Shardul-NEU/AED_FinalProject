@@ -43,7 +43,7 @@ public class AED_FinalProject {
 //         System.out.println(it.next());
 //         PageFrame frame = new PageFrame();
 //           new Inventory();
-        new LoginFrame();
+        new LoginFrame().setVisible(true);
 //        frame.setVisible(true);
     }
     }

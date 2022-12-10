@@ -6,6 +6,7 @@
 package model;
 import enums.ROLES;
 import java.util.Date;
+import org.bson.types.ObjectId;
 /**
  *
  * @author priyankakhimyani
@@ -20,7 +21,7 @@ public class User {
     private String username;
     private String password;
     private String phoneNumber;
-    
+    private ObjectId id;
     public User() {
     }
 
@@ -102,6 +103,16 @@ public class User {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+    
+    
     
     
     
