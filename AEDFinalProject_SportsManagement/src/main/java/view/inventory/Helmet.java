@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package inventory;
+package view.inventory;
 
+import view.inventory.*;
 import database.CRUDDatabase;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -17,27 +18,33 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
-public class Skates extends javax.swing.JFrame {
+
+public class Helmet extends javax.swing.JFrame {
 
     /**
-     * Creates new form Skates
+     * Creates new form Helmet
      */
     ArrayList<Document> orders;
-    Document doc;
+    Document helmetDoc;
     String name;
     int count;
     String brand;
-    public Skates() {
+    
+    public Helmet() {
         initComponents();
-        setVisible(true);
-        doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "skates", "inventory");
         
-        orders = (ArrayList<Document>) doc.get("orders");
+        setVisible(true);
+        
+        helmetDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "helmet", "inventory");
+        
+        orders = (ArrayList<Document>) helmetDoc.get("orders");
         
        
         totalOrders();
         fillOrdertable();
     }
+    
+    
     
     public void totalOrders(){
     
@@ -90,7 +97,7 @@ public class Skates extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(232, 243, 214));
 
-        jLabel1.setText("Ice Skates Inventory");
+        jLabel1.setText("Helmet Inventory");
         jLabel1.setFont(new Font("Serif", Font.PLAIN, 25));
 
         jLabel2.setText("Total Inventory");
@@ -209,15 +216,15 @@ public class Skates extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
 
-        NewOrder newOrder = new NewOrder("skates", "icehockey");
+        NewOrder newOrder = new NewOrder("helmet", "icehockey");
         newOrder.show();
         newOrder.setDefaultCloseOperation(1);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         // TODO add your handling code here:
-        doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "skates", "inventory");
-        orders = (ArrayList<Document>) doc.get("orders");
+        helmetDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "helmet", "inventory");
+        orders = (ArrayList<Document>) helmetDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_refreshBtnMouseClicked
@@ -225,7 +232,7 @@ public class Skates extends javax.swing.JFrame {
     private void deleteOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteOrderMouseClicked
         // TODO add your handling code here:
 
-        ArrayList<Document> arr =  (ArrayList<Document>) doc.get("orders");
+        ArrayList<Document> arr =  (ArrayList<Document>) helmetDoc.get("orders");
         int j = -1;
         for(int i = 0; i< arr.size(); i++){
 
@@ -246,7 +253,7 @@ public class Skates extends javax.swing.JFrame {
             arr.remove(j);
         }
 
-        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "skates", "inventory").get("_id");
+        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "helmet", "inventory").get("_id");
 
         int result = new CRUDDatabase().deleteFomArray(id, arr, "orders", "inventory");
 
@@ -261,45 +268,11 @@ public class Skates extends javax.swing.JFrame {
                 "Order delete",
                 JOptionPane.ERROR_MESSAGE);
         }
-        orders = (ArrayList<Document>) doc.get("orders");
+        orders = (ArrayList<Document>) helmetDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_deleteOrderMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Skates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Skates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Skates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Skates.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Skates().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteOrder;

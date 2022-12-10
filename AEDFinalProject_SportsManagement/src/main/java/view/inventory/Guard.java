@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package inventory;
+package view.inventory;
 
+import view.inventory.*;
 import database.CRUDDatabase;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -17,25 +18,23 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
-public class RingsAndRims extends javax.swing.JFrame {
+public class Guard extends javax.swing.JFrame {
 
     /**
-     * Creates new form RingsAndRims
+     * Creates new form Guard
      */
-    
     ArrayList<Document> orders;
-    Document rrDoc;
+    Document doc;
     String name;
     int count;
     String brand;
-    public RingsAndRims() {
+    
+    public Guard() {
         initComponents();
-        
         setVisible(true);
+        doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "guards", "inventory");
         
-        rrDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "ringsnrims", "inventory");
-        
-        orders = (ArrayList<Document>) rrDoc.get("orders");
+        orders = (ArrayList<Document>) doc.get("orders");
         
        
         totalOrders();
@@ -93,7 +92,7 @@ public class RingsAndRims extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(232, 243, 214));
 
-        jLabel1.setText("Rings n Rim Inventory");
+        jLabel1.setText("Mouth Guard Inventory");
         jLabel1.setFont(new Font("Serif", Font.PLAIN, 25));
 
         jLabel2.setText("Total Inventory");
@@ -140,7 +139,7 @@ public class RingsAndRims extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -158,7 +157,7 @@ public class RingsAndRims extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rrCount, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 27, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,11 +175,11 @@ public class RingsAndRims extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
+                        .addGap(82, 82, 82)
                         .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
         );
@@ -207,21 +206,20 @@ public class RingsAndRims extends javax.swing.JFrame {
         name = (String) ordersTable.getValueAt(row, 0);
         count = Integer.parseInt(ordersTable.getValueAt(row, 1).toString());
         brand = (String) ordersTable.getValueAt(row, 2);
-
     }//GEN-LAST:event_ordersTableMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
 
-        NewOrder newOrder = new NewOrder("ringsnrims", "basketball");
+        NewOrder newOrder = new NewOrder("guards", "icehockey");
         newOrder.show();
         newOrder.setDefaultCloseOperation(1);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         // TODO add your handling code here:
-        rrDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "ringsnrims", "inventory");
-        orders = (ArrayList<Document>) rrDoc.get("orders");
+        doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "guards", "inventory");
+        orders = (ArrayList<Document>) doc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_refreshBtnMouseClicked
@@ -229,7 +227,7 @@ public class RingsAndRims extends javax.swing.JFrame {
     private void deleteOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteOrderMouseClicked
         // TODO add your handling code here:
 
-        ArrayList<Document> arr =  (ArrayList<Document>) rrDoc.get("orders");
+        ArrayList<Document> arr =  (ArrayList<Document>) doc.get("orders");
         int j = -1;
         for(int i = 0; i< arr.size(); i++){
 
@@ -250,7 +248,7 @@ public class RingsAndRims extends javax.swing.JFrame {
             arr.remove(j);
         }
 
-        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "ringsnrims", "inventory").get("_id");
+        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "guards", "inventory").get("_id");
 
         int result = new CRUDDatabase().deleteFomArray(id, arr, "orders", "inventory");
 
@@ -265,45 +263,11 @@ public class RingsAndRims extends javax.swing.JFrame {
                 "Order delete",
                 JOptionPane.ERROR_MESSAGE);
         }
-        orders = (ArrayList<Document>) rrDoc.get("orders");
+        orders = (ArrayList<Document>) doc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_deleteOrderMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RingsAndRims.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RingsAndRims.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RingsAndRims.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RingsAndRims.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RingsAndRims().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteOrder;

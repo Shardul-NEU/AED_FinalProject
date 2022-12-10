@@ -4,10 +4,10 @@
  */
 package com.mycompany.aed_finalproject;
 
-import Venue.secPanel;
-import Venue.mainPanel;
-import Model.Venue;
-import Venue.shiftsPanel;
+import view.venue.secPanel;
+import view.venue.mainPanel;
+import model.Venue;
+import view.venue.shiftsPanel;
 
 /**
  *
