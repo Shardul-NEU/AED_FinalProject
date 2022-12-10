@@ -4,11 +4,16 @@
  */
 package Model;
 
+import Venue_Updated.New_Staff;
+import database.CRUDDatabase;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -90,5 +95,47 @@ public class Venue {
         rrCount.setText(staffList.size()+"");
     }
     
+    public static void refreshtable(JLabel rrCount,JTable ordersTable,String venue,String staff ){
+        Document doc = new CRUDDatabase().getRecordByTwoKeys("venue", venue, "staff", staff, "venueStaff");
+        
+        ArrayList<Document> staffList = (ArrayList<Document>) doc.get("staffList");
+        totalstaffcount(rrCount, staffList);
+        filltable(staffList, ordersTable);
+    }
     
+    public static void createNew(JComboBox jComboBox1, String staff){
+    New_Staff window;
+        window = new New_Staff(staff,jComboBox1.getSelectedItem().toString());
+        window.show();
+        window.setDefaultCloseOperation(1);
+    }
+    
+    public int deletefromtable(ArrayList<Document> arr, String venue, String staff){
+        int j = -1;
+               for(int i = 0; i< arr.size(); i++){
+            
+                        Document doc = arr.get(i);
+            
+                        if(doc.get("userId").toString().equals(userId)
+                                && (doc.get("name").toString().equals(name))
+                                && (doc.get("password").toString().equals(password))
+                                && (Long.parseLong(doc.get("phone").toString())==phone)
+                                &&(doc.get("email").toString().equals(email))
+                           ){
+                
+                               j = i;
+                            }
+            
+                    }
+        
+               if(j > -1){
+            
+                        arr.remove(j);
+                    }
+       
+                ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("venue", venue, "staff", staff, "venueStaff").get("_id");
+        
+                int result = new CRUDDatabase().deleteFomArray(id, arr, "staffList", "venueStaff");
+                return result;
+    }
 }

@@ -4,13 +4,17 @@
  */
 package Venue_Updated;
 
+import static Model.Venue.createNew;
 import static Model.Venue.filltable;
+import static Model.Venue.refreshtable;
 import static Model.Venue.totalstaffcount;
 import database.CRUDDatabase;
 import java.awt.Font;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -18,6 +22,7 @@ import org.bson.Document;
  */
 public class SecStaff_updated extends javax.swing.JPanel {
     ArrayList<Document> staffList;
+    String staff = "security";
     Document doc;
     String name;
     int count;
@@ -32,11 +37,8 @@ public class SecStaff_updated extends javax.swing.JPanel {
         initComponents();
         initComponents();
         setVisible(true);
-        doc = new CRUDDatabase().getRecordByTwoKeys("venue", "marino", "staff", "security", "venueStaff");
-        
-        staffList = (ArrayList<Document>) doc.get("staffList");
-        totalstaffcount(rrCount, staffList);
-        filltable(staffList, ordersTable);
+        String venue = "marino";
+        refreshtable(rrCount,ordersTable,venue,staff);
     }
 
     /**
@@ -57,6 +59,7 @@ public class SecStaff_updated extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ordersTable = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Security Staff Details");
 
@@ -97,6 +100,13 @@ public class SecStaff_updated extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(ordersTable);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "marino", "squashbusters" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,24 +115,25 @@ public class SecStaff_updated extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(rrCount, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(rrCount, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton2))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,38 +149,74 @@ public class SecStaff_updated extends javax.swing.JPanel {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(7, 7, 7)
                         .addComponent(jButton3)
-                        .addGap(258, 258, 258))
+                        .addGap(274, 274, 274))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(rrCount, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1)
                             .addComponent(jButton2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(rrCount, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(16, 16, 16))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        doc = new CRUDDatabase().getRecordByTwoKeys("venue", "marino", "staff", "security", "venueStaff");
-
-        staffList = (ArrayList<Document>) doc.get("staffList");
-        totalstaffcount(rrCount, staffList);
-        filltable(staffList, ordersTable);
+        refreshtable(rrCount,ordersTable,jComboBox1.getSelectedItem().toString(),staff);
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        New_Staff window;
-        window = new New_Staff("security","marino");
-        window.show();
-        window.setDefaultCloseOperation(1);
+        createNew(jComboBox1, staff);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        Document doc1 = new CRUDDatabase().getRecordByTwoKeys("venue", jComboBox1.getSelectedItem().toString(), "staff", staff, "venueStaff");
+               ArrayList<Document> arr =  (ArrayList<Document>) doc1.get("staffList");
+               int j = -1;
+               for(int i = 0; i< arr.size(); i++){
+            
+                        Document doc = arr.get(i);
+            
+                        if(doc.get("userId").toString().equals(userId)
+                                && (doc.get("name").toString().equals(name))
+                                && (doc.get("password").toString().equals(password))
+                                && (Long.parseLong(doc.get("phone").toString())==phone)
+                                &&(doc.get("email").toString().equals(email))
+                           ){
+                
+                               j = i;
+                            }
+            
+                    }
+        
+               if(j > -1){
+            
+                        arr.remove(j);
+                    }
+       
+                ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("venue", jComboBox1.getSelectedItem().toString(), "staff", staff, "venueStaff").get("_id");
+        
+                int result = new CRUDDatabase().deleteFomArray(id, arr, "staffList", "venueStaff");
+        
+                if(result > 0){
+                        JOptionPane.showMessageDialog(this,
+                                "Order was deleted.",
+                                "Order  delete",
+                                JOptionPane.INFORMATION_MESSAGE);
+                    }else{
+                        JOptionPane.showMessageDialog(this,
+                                "Error while deleting order",
+                                "Order delete",
+                                JOptionPane.ERROR_MESSAGE);
+                    }
+               refreshtable(rrCount,ordersTable,jComboBox1.getSelectedItem().toString(),staff);                                      
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void ordersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ordersTableMouseClicked
@@ -184,11 +231,18 @@ public class SecStaff_updated extends javax.swing.JPanel {
         email = (String) ordersTable.getValueAt(row,4);
     }//GEN-LAST:event_ordersTableMouseClicked
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+
+        refreshtable(rrCount,ordersTable,jComboBox1.getSelectedItem().toString(),staff);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
