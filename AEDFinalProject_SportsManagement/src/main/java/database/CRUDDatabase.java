@@ -101,4 +101,12 @@ public class CRUDDatabase {
         
         return (int) result.getModifiedCount();
     }
+    
+    public void insertDocument(Document doc, String collectionName){
+       MongoCollection<Document> collection=this.getCollection(collectionName);
+        collection.insertOne(doc);
+                
+    }
+    
+    
 }

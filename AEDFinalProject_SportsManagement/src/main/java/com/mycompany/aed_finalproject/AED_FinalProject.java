@@ -10,6 +10,7 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import view.common.LoginFrame;
 import view.inventory.Inventory;
 import view.medical.doctor.DoctorHome;
 
@@ -42,7 +43,7 @@ public class AED_FinalProject {
 //         System.out.println(it.next());
 //         PageFrame frame = new PageFrame();
 //           new Inventory();
-        new DoctorHome();
+        new LoginFrame();
 //        frame.setVisible(true);
     }
     }
