@@ -26,7 +26,7 @@ public class CRUDDatabase {
     
     public MongoCollection<Document> getCollection(String collectionName){
         
-        MongoDatabase database = Singleton.connectToDatabase().database;
+        MongoDatabase database = DataBaseConnection.connectToDatabase().database;
     
         return database.getCollection(collectionName);
     }
