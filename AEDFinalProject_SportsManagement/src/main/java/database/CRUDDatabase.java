@@ -112,6 +112,7 @@ public class CRUDDatabase {
         return (int) result.getModifiedCount();
     }
     
+
      public int updateDocumentById(Document query, Bson updates, UpdateOptions options, String collection){
          MongoCollection<Document> coll = getCollection(collection);
         try {
@@ -123,4 +124,35 @@ public class CRUDDatabase {
         return 0;
     
     }
+
+    public void insertDocument(Document doc, String collectionName){
+       MongoCollection<Document> collection=this.getCollection(collectionName);
+        collection.insertOne(doc);
+                
+    }
+    
+     public int updateObjectOfKey(ObjectId id, String key ,Document obj, String collectionName ){
+         
+         MongoCollection<Document> doc= this.getCollection(collectionName);
+        Document query = new Document().append("_id",  id);
+        Bson updates = Updates.combine(
+                Updates.set(key, obj));
+
+        UpdateOptions options = new UpdateOptions().upsert(true);
+        UpdateResult result = null;
+        try {
+             result= doc.updateOne(query, updates, options);
+        } catch (MongoException me) {
+            System.err.println("Unable to update due to an error: " + me);
+        }
+        
+        if(result != null ){
+            return (int) result.getModifiedCount();
+        }
+        
+        return 0;
+        
+    
+    }
+    
 }

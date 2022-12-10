@@ -71,6 +71,16 @@ public class Validation {
         return true;
     }
     
+    
+    public Boolean isNumber(String number){
+        try{
+            int i= Integer.parseInt(number);
+            return true;
+        }catch(Exception ex){
+            return false;
+        }
+    }
+    
     public Boolean emailValidation(String email){
     
         String regex = "^(.+)@(.+)$";  
