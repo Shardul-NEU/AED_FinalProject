@@ -4,7 +4,6 @@
  */
 package view.inventory;
 
-import view.inventory.*;
 import database.CRUDDatabase;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
-public class Backboard extends javax.swing.JFrame {
+public final class Backboard extends javax.swing.JFrame {
 
     /**
      * Creates new form Backboard

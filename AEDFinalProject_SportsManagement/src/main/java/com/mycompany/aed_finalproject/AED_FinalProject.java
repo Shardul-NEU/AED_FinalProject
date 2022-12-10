@@ -9,6 +9,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import java.text.ParseException;
 import org.bson.Document;
 import view.inventory.Inventory;
 import view.medical.doctor.DoctorHome;
@@ -29,7 +30,7 @@ public class AED_FinalProject {
 //        MongoCollection<Document> mainShift = database.getCollection("mainShift");
 //    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         
         
 //      If want to connect to new collection create instacne below this.

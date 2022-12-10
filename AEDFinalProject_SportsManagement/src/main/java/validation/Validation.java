@@ -40,7 +40,12 @@ public class Validation {
     
     public Boolean onlyCharacters(String characters){
         
-        return characters.matches("[a-zA-Z]+");
+        return characters.matches("[a-zA-Z\\s]+");
+    }
+    
+    public Boolean onlyCharactersWithCommaPeriod(String characters){
+        
+        return characters.matches("[a-zA-Z\\s,\\.]+");
     }
     
     public Boolean salaryValidate(String salary){

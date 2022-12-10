@@ -10,6 +10,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.UpdateOptions;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
@@ -32,6 +33,15 @@ public class CRUDDatabase {
     }
     
     public Document getRecordByKey(String key, String value, String collectionName){
+    
+    
+        MongoCollection<Document> doc = getCollection(collectionName);
+        
+        return doc.find(new Document(key, value)).first();
+        
+    }
+    
+    public Document getRecordByKey(String key, ObjectId value, String collectionName){
     
     
         MongoCollection<Document> doc = getCollection(collectionName);
@@ -100,5 +110,17 @@ public class CRUDDatabase {
                     
         
         return (int) result.getModifiedCount();
+    }
+    
+     public int updateDocumentById(Document query, Bson updates, UpdateOptions options, String collection){
+         MongoCollection<Document> coll = getCollection(collection);
+        try {
+                UpdateResult result = coll.updateOne(query, updates, options);
+                return (int) result.getModifiedCount();
+            } catch (MongoException me) {
+                System.err.println("Unable to update due to an error: " + me);
+            }
+        return 0;
+    
     }
 }

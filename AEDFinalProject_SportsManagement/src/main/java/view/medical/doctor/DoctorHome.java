@@ -6,6 +6,13 @@ package view.medical.doctor;
 
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.text.ParseException;
+import java.util.ArrayList;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import org.bson.Document;
 import services.DoctorService;
 
 /**
@@ -19,16 +26,45 @@ public class DoctorHome extends javax.swing.JFrame {
      */
     
     DoctorService docSer = new DoctorService();
+    ArrayList<Document> histories;
+    int row = -1;
+    String selectedDate = "";
     
-    public DoctorHome() {
+    public DoctorHome() throws ParseException {
         initComponents();
         getContentPane().setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         pack();
         setResizable(false);
         setVisible(true);
         
-        docSer.returnDateSortedData();
+        histories = docSer.returnDateSortedData();
         
+        fillDateTable();
+        
+    }
+    
+    private void fillDateTable(){
+    
+        String[] columnNames = {"Date"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                   //all cells false
+                   return false;
+                };
+        };
+
+        for(int i = 0; i < histories.size(); i++){
+        
+     
+            Document history = (Document) histories.get(i);
+
+            model.addRow(new Object[] { history.get("date") });
+        
+            dateTable.setModel(model);
+        }
+
+    
     }
 
     /**
@@ -42,18 +78,21 @@ public class DoctorHome extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         doctorNameLabel = new javax.swing.JLabel();
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        splitPanel = new javax.swing.JSplitPane();
+        appScrollPane = new javax.swing.JScrollPane();
         appointmentsTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         dateTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         doctorNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         doctorNameLabel.setText("Doctor");
         doctorNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+
+        splitPanel.setResizeWeight(0.4);
 
         appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -62,9 +101,19 @@ public class DoctorHome extends javax.swing.JFrame {
                 "Name", "Diagnosis For"
             }
         ));
-        jScrollPane1.setViewportView(appointmentsTable);
+        appointmentsTable.setRowHeight(50);
+        appointmentsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                appointmentsTableMouseClicked(evt);
+            }
+        });
+        appScrollPane.setViewportView(appointmentsTable);
+        appointmentsTable.setFont(new Font("Serif", Font.PLAIN, 20));
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        appointmentsTable.setDefaultRenderer(String.class, centerRenderer);
 
-        jSplitPane1.setRightComponent(jScrollPane1);
+        splitPanel.setRightComponent(appScrollPane);
 
         dateTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,6 +123,13 @@ public class DoctorHome extends javax.swing.JFrame {
                 "Date"
             }
         ));
+        dateTable.setRowHeight(50);
+        dateTable.setFont(new Font("Serif", Font.PLAIN, 20));
+        dateTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dateTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(dateTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -90,26 +146,34 @@ public class DoctorHome extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
         );
 
-        jSplitPane1.setLeftComponent(jPanel2);
+        splitPanel.setLeftComponent(jPanel2);
+
+        jLabel1.setText("Appointments");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(splitPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(doctorNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(doctorNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jSplitPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 734, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(doctorNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(doctorNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSplitPane1))
+                .addComponent(splitPanel))
         );
+
+        jLabel1.setFont(new Font("Serif", Font.PLAIN, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,15 +189,65 @@ public class DoctorHome extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void dateTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dateTableMouseClicked
+        // TODO add your handling code here:
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        this.selectedDate = (String) dateTable.getValueAt(row, 0);
+        fillAppointments();
+        splitPanel.setRightComponent(appScrollPane);
+        
+    }//GEN-LAST:event_dateTableMouseClicked
+
+    private void appointmentsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_appointmentsTableMouseClicked
+        // TODO add your handling code here:
+        
+        
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        String name = appointmentsTable.getValueAt(row, 0).toString();
+        
+        Document doc = docSer.getSelectedAppointment(histories, name, this.selectedDate);
+       
+        Diagnosis dia = new Diagnosis(doc);
+        
+        splitPanel.setRightComponent(dia);
+    }//GEN-LAST:event_appointmentsTableMouseClicked
+    
+    private void fillAppointments(){
+        
+        String[] columnNames = {"Name", "Diagnosis For"};
+        DefaultTableModel model = new DefaultTableModel(columnNames, 0){
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                   //all cells false
+                   return false;
+                };
+        };
+
+        for(int i = 0; i < histories.size(); i++){
+        
+     
+            Document history = (Document) histories.get(i);
+            if(history.get("date").equals(this.selectedDate)){
+                model.addRow(new Object[] { history.get("name"), history.get("shownFor") });
+            }
+            
+        
+            appointmentsTable.setModel(model);
+        }
+     
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane appScrollPane;
     private javax.swing.JTable appointmentsTable;
     private javax.swing.JTable dateTable;
     private javax.swing.JLabel doctorNameLabel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JSplitPane splitPanel;
     // End of variables declaration//GEN-END:variables
 }
