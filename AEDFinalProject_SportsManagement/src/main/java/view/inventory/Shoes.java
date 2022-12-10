@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package inventory;
+package view.inventory;
 
+import view.inventory.*;
 import database.CRUDDatabase;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -17,30 +18,31 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
-public class Jersey extends javax.swing.JFrame {
+public class Shoes extends javax.swing.JFrame {
 
     /**
-     * Creates new form Jersey
+     * Creates new form Shoes
      */
-    
     ArrayList<Document> orders;
-    Document jerseyDoc;
+    Document shoeDoc;
     String name;
     int count;
     String brand;
-    public Jersey() {
+    
+    public Shoes() {
         initComponents();
+        
         setVisible(true);
         
-        jerseyDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "jersey", "inventory");
+        shoeDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "shoes", "inventory");
         
-        orders = (ArrayList<Document>) jerseyDoc.get("orders");
+        orders = (ArrayList<Document>) shoeDoc.get("orders");
         
        
         totalOrders();
         fillOrdertable();
     }
-
+    
     public void totalOrders(){
     
         rrCount.setText(orders.size()+"");
@@ -67,6 +69,7 @@ public class Jersey extends javax.swing.JFrame {
         
         
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -91,7 +94,7 @@ public class Jersey extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(232, 243, 214));
 
-        jLabel1.setText("Jersey Inventory");
+        jLabel1.setText("Shoes Inventory");
         jLabel1.setFont(new Font("Serif", Font.PLAIN, 25));
 
         jLabel2.setText("Total Inventory");
@@ -138,7 +141,7 @@ public class Jersey extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(28, 28, 28)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -174,7 +177,7 @@ public class Jersey extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
+                        .addGap(93, 93, 93)
                         .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -210,15 +213,15 @@ public class Jersey extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
 
-        NewOrder newOrder = new NewOrder("jersey", "basketball");
+        NewOrder newOrder = new NewOrder("shoes", "basketball");
         newOrder.show();
         newOrder.setDefaultCloseOperation(1);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         // TODO add your handling code here:
-        jerseyDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "jersey", "inventory");
-        orders = (ArrayList<Document>) jerseyDoc.get("orders");
+        shoeDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "shoes", "inventory");
+        orders = (ArrayList<Document>) shoeDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_refreshBtnMouseClicked
@@ -226,7 +229,7 @@ public class Jersey extends javax.swing.JFrame {
     private void deleteOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteOrderMouseClicked
         // TODO add your handling code here:
 
-        ArrayList<Document> arr =  (ArrayList<Document>) jerseyDoc.get("orders");
+        ArrayList<Document> arr =  (ArrayList<Document>) shoeDoc.get("orders");
         int j = -1;
         for(int i = 0; i< arr.size(); i++){
 
@@ -247,7 +250,7 @@ public class Jersey extends javax.swing.JFrame {
             arr.remove(j);
         }
 
-        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "jersey", "inventory").get("_id");
+        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "shoes", "inventory").get("_id");
 
         int result = new CRUDDatabase().deleteFomArray(id, arr, "orders", "inventory");
 
@@ -262,7 +265,7 @@ public class Jersey extends javax.swing.JFrame {
                 "Order delete",
                 JOptionPane.ERROR_MESSAGE);
         }
-        orders = (ArrayList<Document>) jerseyDoc.get("orders");
+        orders = (ArrayList<Document>) shoeDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_deleteOrderMouseClicked

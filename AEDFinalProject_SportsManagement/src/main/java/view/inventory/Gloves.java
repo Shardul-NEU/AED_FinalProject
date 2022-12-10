@@ -2,13 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package inventory;
+package view.inventory;
 
+import view.inventory.*;
 import database.CRUDDatabase;
 import java.awt.Font;
-import java.awt.Toolkit;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -20,25 +18,25 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
-public class Ball extends javax.swing.JFrame {
+public class Gloves extends javax.swing.JFrame {
 
     /**
-     * Creates new form ball
+     * Creates new form Gloves
      */
     ArrayList<Document> orders;
-    Document ballDoc;
+    Document gloveDoc;
     String name;
     int count;
     String brand;
     
-    
-    public Ball() {
+    public Gloves() {
         initComponents();
+        
         setVisible(true);
         
-        ballDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "ball", "inventory");
+        gloveDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "gloves", "inventory");
         
-        orders = (ArrayList<Document>) ballDoc.get("orders");
+        orders = (ArrayList<Document>) gloveDoc.get("orders");
         
        
         totalOrders();
@@ -48,7 +46,7 @@ public class Ball extends javax.swing.JFrame {
     
     public void totalOrders(){
     
-        ballCount.setText(orders.size()+"");
+        rrCount.setText(orders.size()+"");
     
     }
     
@@ -72,7 +70,6 @@ public class Ball extends javax.swing.JFrame {
         
         
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -83,9 +80,10 @@ public class Ball extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        ballCount = new javax.swing.JLabel();
+        rrCount = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ordersTable = new javax.swing.JTable();
@@ -94,17 +92,18 @@ public class Ball extends javax.swing.JFrame {
         deleteOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(232, 243, 214));
 
-        jLabel1.setText("Ball Inventory");
+        jPanel1.setBackground(new java.awt.Color(232, 243, 214));
+
+        jLabel1.setText("Gloves Inventory");
         jLabel1.setFont(new Font("Serif", Font.PLAIN, 25));
 
-        jLabel2.setText("Total Balls in Inventory");
+        jLabel2.setText("Total Inventory");
         jLabel2.setFont(new Font("Serif", Font.PLAIN, 20));
 
-        ballCount.setFont(new Font("Serif", Font.PLAIN, 20));
+        rrCount.setFont(new Font("Serif", Font.PLAIN, 20));
 
-        jLabel3.setText("Ball Orders");
+        jLabel3.setText("Orders ->");
         jLabel3.setFont(new Font("Serif", Font.PLAIN, 20));
 
         ordersTable.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -138,146 +137,152 @@ public class Ball extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(refreshBtn))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ballCount, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(30, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(deleteOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(135, 135, 135))))
+                        .addGap(146, 146, 146))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(refreshBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 506, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rrCount, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(deleteOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ballCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addComponent(rrCount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
+                        .addGap(82, 82, 82)
                         .addComponent(refreshBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27))))
+                        .addContainerGap())))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ordersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ordersTableMouseClicked
+        // TODO add your handling code here:
+
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        name = (String) ordersTable.getValueAt(row, 0);
+        count = Integer.parseInt(ordersTable.getValueAt(row, 1).toString());
+        brand = (String) ordersTable.getValueAt(row, 2);
+    }//GEN-LAST:event_ordersTableMouseClicked
+
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        
-        NewOrder newOrder = new NewOrder("ball","basketball");
+
+        NewOrder newOrder = new NewOrder("gloves", "icehockey");
         newOrder.show();
         newOrder.setDefaultCloseOperation(1);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         // TODO add your handling code here:
-        ballDoc = new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "ball", "inventory");
-        orders = (ArrayList<Document>) ballDoc.get("orders");
+        gloveDoc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "gloves", "inventory");
+        orders = (ArrayList<Document>) gloveDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_refreshBtnMouseClicked
 
     private void deleteOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteOrderMouseClicked
         // TODO add your handling code here:
-        
-        ArrayList<Document> arr =  (ArrayList<Document>) ballDoc.get("orders");
+
+        ArrayList<Document> arr =  (ArrayList<Document>) gloveDoc.get("orders");
         int j = -1;
         for(int i = 0; i< arr.size(); i++){
-            
+
             Document doc = arr.get(i);
-            
+
             if(doc.get("name").toString().equals(name)
                 && (Integer.parseInt(doc.get("count").toString()) == count)
                 && doc.get("brand").toString().equals(brand)
-                    ){
-            
+            ){
+
                 j = i;
             }
-            
+
         }
-        
+
         if(j > -1){
-        
+
             arr.remove(j);
         }
-        
-        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "basketball", "item", "ball", "inventory").get("_id");
-        
+
+        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "gloves", "inventory").get("_id");
+
         int result = new CRUDDatabase().deleteFomArray(id, arr, "orders", "inventory");
-        
-        
+
         if(result > 0){
-              JOptionPane.showMessageDialog(this,
-          "Order was deleted.",
-          "Order  delete",
-          JOptionPane.INFORMATION_MESSAGE);
-          }else{
-              JOptionPane.showMessageDialog(this,
-               "Error while deleting order",
-          "Order delete",
-          JOptionPane.ERROR_MESSAGE);
-          }
-        orders = (ArrayList<Document>) ballDoc.get("orders");
+            JOptionPane.showMessageDialog(this,
+                "Order was deleted.",
+                "Order  delete",
+                JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,
+                "Error while deleting order",
+                "Order delete",
+                JOptionPane.ERROR_MESSAGE);
+        }
+        orders = (ArrayList<Document>) gloveDoc.get("orders");
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_deleteOrderMouseClicked
 
-    private void ordersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ordersTableMouseClicked
-        // TODO add your handling code here:
-        
-        JTable source = (JTable)evt.getSource();
-        int row = source.rowAtPoint( evt.getPoint() );
-        name = (String) ordersTable.getValueAt(row, 0);
-        count = Integer.parseInt(ordersTable.getValueAt(row, 1).toString());
-        brand = (String) ordersTable.getValueAt(row, 2);
-        System.out.println(name +" "+count+" "+ brand);
-        
-        
-    }//GEN-LAST:event_ordersTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ballCount;
     private javax.swing.JButton deleteOrder;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable ordersTable;
     private javax.swing.JButton refreshBtn;
+    private javax.swing.JLabel rrCount;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package inventory;
+package view.inventory;
 
-import Model.InventoryOrder;
+import view.inventory.*;
+import model.InventoryOrder;
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.util.JSON;

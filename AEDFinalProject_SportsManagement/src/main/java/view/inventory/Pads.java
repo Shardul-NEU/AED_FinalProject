@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package inventory;
+package view.inventory;
 
+import view.inventory.*;
 import database.CRUDDatabase;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -17,21 +18,23 @@ import org.bson.types.ObjectId;
  *
  * @author priyankakhimyani
  */
-public class Guard extends javax.swing.JFrame {
+public class Pads extends javax.swing.JFrame {
 
     /**
-     * Creates new form Guard
+     * Creates new form Pads
      */
+    
     ArrayList<Document> orders;
     Document doc;
     String name;
     int count;
     String brand;
     
-    public Guard() {
+    public Pads() {
         initComponents();
         setVisible(true);
-        doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "guards", "inventory");
+        
+        doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "pads", "inventory");
         
         orders = (ArrayList<Document>) doc.get("orders");
         
@@ -91,7 +94,7 @@ public class Guard extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(232, 243, 214));
 
-        jLabel1.setText("Mouth Guard Inventory");
+        jLabel1.setText("ShouderPads Inventory");
         jLabel1.setFont(new Font("Serif", Font.PLAIN, 25));
 
         jLabel2.setText("Total Inventory");
@@ -210,14 +213,14 @@ public class Guard extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
 
-        NewOrder newOrder = new NewOrder("guards", "icehockey");
+        NewOrder newOrder = new NewOrder("pads", "icehockey");
         newOrder.show();
         newOrder.setDefaultCloseOperation(1);
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void refreshBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnMouseClicked
         // TODO add your handling code here:
-        doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "guards", "inventory");
+        doc = new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "pads", "inventory");
         orders = (ArrayList<Document>) doc.get("orders");
         fillOrdertable();
         totalOrders();
@@ -247,7 +250,7 @@ public class Guard extends javax.swing.JFrame {
             arr.remove(j);
         }
 
-        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "guards", "inventory").get("_id");
+        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByTwoKeys("game", "icehockey", "item", "pads", "inventory").get("_id");
 
         int result = new CRUDDatabase().deleteFomArray(id, arr, "orders", "inventory");
 
@@ -266,6 +269,7 @@ public class Guard extends javax.swing.JFrame {
         fillOrdertable();
         totalOrders();
     }//GEN-LAST:event_deleteOrderMouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
