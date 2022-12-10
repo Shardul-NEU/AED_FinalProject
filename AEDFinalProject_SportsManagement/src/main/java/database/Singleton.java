@@ -21,15 +21,11 @@ import org.bson.codecs.pojo.PojoCodecProvider;
 public class Singleton {
     
     
-    private static Singleton database = null;
+    private static Singleton instance = null;
+    public MongoDatabase database;
     
     private Singleton()
     {
-        
-    }
-    
-    public MongoDatabase connectToDatabase(){
-        
         ConnectionString connectionString = new ConnectionString("mongodb+srv://suraj:7021072380@cluster0.ehrr7jd.mongodb.net/?retryWrites=true&w=majority");
         
         CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
@@ -45,10 +41,16 @@ public class Singleton {
                 .build();
         
         MongoClient client = (MongoClient) MongoClients.create(clientSettings);
-        MongoDatabase database = client.getDatabase("SportsManagement");
+        database = client.getDatabase("SportsManagement");
        
-        
-        return database;
+    }
+    
+      public static Singleton connectToDatabase()
+    {
+        if (instance == null)
+            instance = new Singleton();
+  
+        return instance;
     }
     
 }
