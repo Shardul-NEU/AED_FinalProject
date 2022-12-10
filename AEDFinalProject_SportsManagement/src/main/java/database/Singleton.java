@@ -18,7 +18,15 @@ import org.bson.codecs.pojo.PojoCodecProvider;
  *
  * @author priyankakhimyani
  */
-public class DatabaseConnection {
+public class Singleton {
+    
+    
+    private static Singleton database = null;
+    
+    private Singleton()
+    {
+        
+    }
     
     public MongoDatabase connectToDatabase(){
         
