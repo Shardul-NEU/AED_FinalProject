@@ -18,13 +18,13 @@ import org.bson.codecs.pojo.PojoCodecProvider;
  *
  * @author priyankakhimyani
  */
-public class Singleton {
+public class DataBaseConnection {
     
     
-    private static Singleton instance = null;
+    private static DataBaseConnection instance = null;
     public MongoDatabase database;
     
-    private Singleton()
+    private DataBaseConnection()
     {
         ConnectionString connectionString = new ConnectionString("mongodb+srv://suraj:7021072380@cluster0.ehrr7jd.mongodb.net/?retryWrites=true&w=majority");
         
@@ -45,10 +45,10 @@ public class Singleton {
        
     }
     
-      public static Singleton connectToDatabase()
+      public static DataBaseConnection connectToDatabase()
     {
         if (instance == null)
-            instance = new Singleton();
+            instance = new DataBaseConnection();
   
         return instance;
     }

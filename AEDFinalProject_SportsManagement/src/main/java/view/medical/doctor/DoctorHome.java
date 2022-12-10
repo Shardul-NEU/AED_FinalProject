@@ -6,6 +6,7 @@ package view.medical.doctor;
 
 import java.awt.Font;
 import java.awt.Toolkit;
+import services.DoctorService;
 
 /**
  *
@@ -16,12 +17,18 @@ public class DoctorHome extends javax.swing.JFrame {
     /**
      * Creates new form DoctorHome
      */
+    
+    DoctorService docSer = new DoctorService();
+    
     public DoctorHome() {
         initComponents();
         getContentPane().setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         pack();
         setResizable(false);
         setVisible(true);
+        
+        docSer.fillDatetable();
+        
     }
 
     /**
@@ -37,10 +44,10 @@ public class DoctorHome extends javax.swing.JFrame {
         doctorNameLabel = new javax.swing.JLabel();
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        appointmentsTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        dateTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,22 +55,18 @@ public class DoctorHome extends javax.swing.JFrame {
         doctorNameLabel.setText("Doctor");
         doctorNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Diagnosis For"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(appointmentsTable);
 
         jSplitPane1.setRightComponent(jScrollPane1);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        dateTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -71,7 +74,7 @@ public class DoctorHome extends javax.swing.JFrame {
                 "Date"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(dateTable);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -124,13 +127,13 @@ public class DoctorHome extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable appointmentsTable;
+    private javax.swing.JTable dateTable;
     private javax.swing.JLabel doctorNameLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
 }
