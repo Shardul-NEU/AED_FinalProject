@@ -65,6 +65,10 @@ public class Games extends javax.swing.JPanel {
         gamesTable = new javax.swing.JTable();
         gardenArena = new javax.swing.JButton();
         matthewsArena = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(234, 234, 253));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         gamesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,7 +79,10 @@ public class Games extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(gamesTable);
 
-        gardenArena.setText("View TD Garden");
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 112, 679, 444));
+
+        gardenArena.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        gardenArena.setText("TD Garden");
         gardenArena.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 gardenArenaMouseClicked(evt);
@@ -86,36 +93,20 @@ public class Games extends javax.swing.JPanel {
                 gardenArenaActionPerformed(evt);
             }
         });
+        add(gardenArena, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 30, 147, 49));
 
-        matthewsArena.setText("View Matthews Arena");
+        matthewsArena.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        matthewsArena.setText("Matthews Arena");
         matthewsArena.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 matthewsArenaMouseClicked(evt);
             }
         });
+        add(matthewsArena, new org.netbeans.lib.awtextra.AbsoluteConstraints(374, 30, 176, 49));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(gardenArena, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(matthewsArena, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(gardenArena, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                    .addComponent(matthewsArena, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/Location.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(298, 32, 44, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void gardenArenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gardenArenaActionPerformed
@@ -140,6 +131,7 @@ public class Games extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable gamesTable;
     private javax.swing.JButton gardenArena;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton matthewsArena;
     // End of variables declaration//GEN-END:variables

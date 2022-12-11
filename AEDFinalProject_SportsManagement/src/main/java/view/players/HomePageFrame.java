@@ -7,7 +7,6 @@ package view.players;
 import java.awt.Toolkit;
 import model.ActiveUser;
 import view.players.panel.MedicalPanel;
-import view.players.panel.RequestItemsPanel;
 import view.players.panel.UpdateProfilePanel;
 
 /**
@@ -43,10 +42,11 @@ public class HomePageFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         updateProfilePanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        requestInventoryPanel = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         medicalAppointmentPanel.setBackground(new java.awt.Color(255, 255, 255));
         medicalAppointmentPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -63,9 +63,7 @@ public class HomePageFrame extends javax.swing.JFrame {
         medicalAppointmentPanel.setLayout(medicalAppointmentPanelLayout);
         medicalAppointmentPanelLayout.setHorizontalGroup(
             medicalAppointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(medicalAppointmentPanelLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         medicalAppointmentPanelLayout.setVerticalGroup(
             medicalAppointmentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -74,6 +72,8 @@ public class HomePageFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        jPanel1.add(medicalAppointmentPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 120, -1, -1));
 
         updateProfilePanel.setBackground(new java.awt.Color(255, 255, 255));
         updateProfilePanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -90,9 +90,7 @@ public class HomePageFrame extends javax.swing.JFrame {
         updateProfilePanel.setLayout(updateProfilePanelLayout);
         updateProfilePanelLayout.setHorizontalGroup(
             updateProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(updateProfilePanelLayout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         updateProfilePanelLayout.setVerticalGroup(
             updateProfilePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,56 +100,7 @@ public class HomePageFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        requestInventoryPanel.setBackground(new java.awt.Color(255, 255, 255));
-        requestInventoryPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        requestInventoryPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                requestInventoryPanelMouseClicked(evt);
-            }
-        });
-
-        jLabel3.setText("         Request Items");
-
-        javax.swing.GroupLayout requestInventoryPanelLayout = new javax.swing.GroupLayout(requestInventoryPanel);
-        requestInventoryPanel.setLayout(requestInventoryPanelLayout);
-        requestInventoryPanelLayout.setHorizontalGroup(
-            requestInventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, requestInventoryPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
-        requestInventoryPanelLayout.setVerticalGroup(
-            requestInventoryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(requestInventoryPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(requestInventoryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(updateProfilePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(medicalAppointmentPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(medicalAppointmentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(updateProfilePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(requestInventoryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(219, Short.MAX_VALUE))
-        );
+        jPanel1.add(updateProfilePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 224, -1, -1));
 
         mainScreenPanel.setLeftComponent(jPanel1);
 
@@ -163,7 +112,7 @@ public class HomePageFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(mainScreenPanel)
+            .addComponent(mainScreenPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
         );
 
         pack();
@@ -183,11 +132,6 @@ public class HomePageFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void requestInventoryPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_requestInventoryPanelMouseClicked
-        // TODO add your handling code here:
-        mainScreenPanel.setRightComponent(new RequestItemsPanel());
-    }//GEN-LAST:event_requestInventoryPanelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -227,11 +171,9 @@ public class HomePageFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSplitPane mainScreenPanel;
     private javax.swing.JPanel medicalAppointmentPanel;
-    private javax.swing.JPanel requestInventoryPanel;
     private javax.swing.JPanel updateProfilePanel;
     // End of variables declaration//GEN-END:variables
 }

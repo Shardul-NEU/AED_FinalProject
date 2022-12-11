@@ -56,50 +56,39 @@ public class CoachesHomePage extends javax.swing.JFrame {
         splitPane = new javax.swing.JSplitPane();
         leftBackgroundPanel = new javax.swing.JPanel();
         gamesBtn = new javax.swing.JButton();
-        teamBtn = new javax.swing.JButton();
+        Teams = new javax.swing.JButton();
         rightBackgroundPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         gamesTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        leftBackgroundPanel.setBackground(new java.awt.Color(204, 204, 255));
+        leftBackgroundPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        gamesBtn.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         gamesBtn.setText("Games");
         gamesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 gamesBtnActionPerformed(evt);
             }
         });
+        leftBackgroundPanel.add(gamesBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
-        teamBtn.setText("Team");
-        teamBtn.addActionListener(new java.awt.event.ActionListener() {
+        Teams.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        Teams.setText("Team");
+        Teams.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                teamBtnActionPerformed(evt);
+                TeamsActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout leftBackgroundPanelLayout = new javax.swing.GroupLayout(leftBackgroundPanel);
-        leftBackgroundPanel.setLayout(leftBackgroundPanelLayout);
-        leftBackgroundPanelLayout.setHorizontalGroup(
-            leftBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leftBackgroundPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(leftBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(gamesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(leftBackgroundPanelLayout.createSequentialGroup()
-                        .addComponent(teamBtn)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-        );
-        leftBackgroundPanelLayout.setVerticalGroup(
-            leftBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(leftBackgroundPanelLayout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(gamesBtn)
-                .addGap(58, 58, 58)
-                .addComponent(teamBtn)
-                .addContainerGap(292, Short.MAX_VALUE))
-        );
+        leftBackgroundPanel.add(Teams, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, 80, -1));
 
         splitPane.setLeftComponent(leftBackgroundPanel);
+
+        rightBackgroundPanel.setBackground(new java.awt.Color(234, 234, 253));
+        rightBackgroundPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         gamesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,18 +103,11 @@ public class CoachesHomePage extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(gamesTable);
 
-        javax.swing.GroupLayout rightBackgroundPanelLayout = new javax.swing.GroupLayout(rightBackgroundPanel);
-        rightBackgroundPanel.setLayout(rightBackgroundPanelLayout);
-        rightBackgroundPanelLayout.setHorizontalGroup(
-            rightBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
-        );
-        rightBackgroundPanelLayout.setVerticalGroup(
-            rightBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightBackgroundPanelLayout.createSequentialGroup()
-                .addGap(0, 74, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        rightBackgroundPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 74, 690, 500));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
+        jLabel1.setText("GAMES");
+        rightBackgroundPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 80, -1));
 
         splitPane.setRightComponent(rightBackgroundPanel);
 
@@ -133,7 +115,7 @@ public class CoachesHomePage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(splitPane)
+            .addComponent(splitPane, javax.swing.GroupLayout.DEFAULT_SIZE, 855, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,23 +131,24 @@ public class CoachesHomePage extends javax.swing.JFrame {
         this.splitPane.setRightComponent(games);
     }//GEN-LAST:event_gamesBtnActionPerformed
 
-    private void teamBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamBtnActionPerformed
+    private void TeamsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeamsActionPerformed
         // TODO add your handling code here:
         this.rightPanel = new TeamView(splitPane, this.game);
         this.splitPane.setRightComponent(rightPanel);
-    }//GEN-LAST:event_teamBtnActionPerformed
+    }//GEN-LAST:event_TeamsActionPerformed
 
     /**
      * @param args the command line arguments
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Teams;
     private javax.swing.JButton gamesBtn;
     private javax.swing.JTable gamesTable;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel leftBackgroundPanel;
     private javax.swing.JPanel rightBackgroundPanel;
     private javax.swing.JSplitPane splitPane;
-    private javax.swing.JButton teamBtn;
     // End of variables declaration//GEN-END:variables
 }

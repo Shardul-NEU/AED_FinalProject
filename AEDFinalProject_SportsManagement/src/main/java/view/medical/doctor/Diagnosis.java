@@ -67,49 +67,61 @@ public class Diagnosis extends javax.swing.JPanel {
         SaveRecord = new javax.swing.JButton();
         historyBtn = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(234, 234, 253));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Diagnosis For");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 101, 141, 35));
-        add(diagnosisForField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 330, 50));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 141, 35));
+        add(diagnosisForField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 420, 50));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Notes");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(32, 191, 96, 41));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 96, 41));
 
         notesField.setColumns(20);
         notesField.setRows(5);
         jScrollPane1.setViewportView(notesField);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 169, 332, -1));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 420, -1));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Medicine");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 326, 91, 42));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 91, 42));
 
         medicineField.setColumns(20);
         medicineField.setRows(5);
         jScrollPane2.setViewportView(medicineField);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 301, -1, -1));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 420, 80));
 
+        SaveRecord.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         SaveRecord.setText("Save Record");
         SaveRecord.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SaveRecordMouseClicked(evt);
             }
         });
-        add(SaveRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 504, 139, 46));
+        add(SaveRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 160, 46));
 
+        historyBtn.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         historyBtn.setText("View History");
         historyBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 historyBtnMouseClicked(evt);
             }
         });
-        add(historyBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 504, 168, 46));
+        add(historyBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, 168, 46));
 
+        nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         nameLabel.setText("Name");
-        add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 210, 30));
+        add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 30));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/Stetho.png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, 60, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveRecordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveRecordMouseClicked
@@ -174,6 +186,7 @@ public class Diagnosis extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea medicineField;
