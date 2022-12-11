@@ -40,7 +40,7 @@ public class TeamView extends javax.swing.JPanel {
     }
     
     private void populateTable(){
-        
+        count = 1;
         if(this.game.equals("basketball")){
             this.userList= this.userService.fetchUserByRoles(ROLES.BBPLAYER);
         }else{
