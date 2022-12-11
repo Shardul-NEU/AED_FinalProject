@@ -4,6 +4,7 @@
  */
 package view.players;
 
+import java.awt.Toolkit;
 import model.ActiveUser;
 import view.players.panel.MedicalPanel;
 import view.players.panel.RequestItemsPanel;
@@ -20,7 +21,9 @@ public class HomePageFrame extends javax.swing.JFrame {
      */
     public HomePageFrame() {
         initComponents();
-                                          
+         getContentPane().setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+        pack();
+        setResizable(false);
         //setting right screen to medical Panel as default
         this.mainScreenPanel.setRightComponent(new MedicalPanel());
     }

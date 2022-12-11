@@ -22,7 +22,7 @@ import view.medical.doctor.DoctorHome;
  * @author Shardul
  */
 public class AED_FinalProject {
-    
+        
 //    public static class database{
 //        MongoClient client = MongoClients.create("mongodb+srv://suraj:7021072380@cluster0.ehrr7jd.mongodb.net/?retryWrites=true&w=majority");
 //        MongoDatabase database = client.getDatabase("SportsManagement");

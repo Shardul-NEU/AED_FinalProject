@@ -4,6 +4,27 @@
  */
 package view.players.panel;
 
+import enums.ROLES;
+import java.awt.Toolkit;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import javax.swing.text.DateFormatter;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import model.ActiveUser;
+import services.UserService;
+import model.User;
+import model.Medical;
+import model.MedicalHistory;
+import services.MedicalService;
+import validation.Validation;
+
 /**
  *
  * @author Shardul
@@ -13,8 +34,29 @@ public class MedicalPanel extends javax.swing.JPanel {
     /**
      * Creates new form MedicalPanel
      */
+    private DateFormatter dateFormatter;
+    private UserService userService;
+    private MedicalService medicalService;
+
     public MedicalPanel() {
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        dateFormatter = new DateFormatter(dateFormat);
+        this.userService = new UserService();
+        this.medicalService = new MedicalService();
         initComponents();
+        populateDoctor();
+        Date d = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        this.requestDate.setText(dateFormat.format(d));
+
+    }
+
+    private void populateDoctor() {
+
+        List<User> users = this.userService.fetchUserByRoles(ROLES.DOCTOR);
+        User doctorName[] = new User[users.size()];
+        doctorOption.setModel(new javax.swing.DefaultComboBoxModel<>(users.toArray(doctorName)));
+
     }
 
     /**
@@ -26,19 +68,176 @@ public class MedicalPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        doctorOption = new javax.swing.JComboBox<User>();
+        jLabel2 = new javax.swing.JLabel();
+        requestDate = new javax.swing.JFormattedTextField(dateFormatter);
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        scheduleBtn = new javax.swing.JButton();
+        clearBtn = new javax.swing.JButton();
+        reasonTF = new javax.swing.JTextField();
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("Request Doctor Appointment");
+
+        jLabel2.setText("Doctor ");
+
+        requestDate.setValue(new Date());
+        requestDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestDateActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Date");
+
+        jLabel4.setText("Reason");
+
+        scheduleBtn.setText("Request");
+        scheduleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                scheduleBtnActionPerformed(evt);
+            }
+        });
+
+        clearBtn.setText("Clear");
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(131, 131, 131)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(scheduleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(doctorOption, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(requestDate)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reasonTF))
+                .addContainerGap(138, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(doctorOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(requestDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(reasonTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(scheduleBtn)
+                    .addComponent(clearBtn))
+                .addContainerGap(124, Short.MAX_VALUE))
+        );
+
+        doctorOption.getAccessibleContext().setAccessibleName("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 713, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void requestDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestDateActionPerformed
+        // TODO add your handling code here:
 
+
+    }//GEN-LAST:event_requestDateActionPerformed
+
+    private void scheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_scheduleBtnActionPerformed
+        // TODO add your handling code here:
+
+        try {
+            Validation validator = new Validation();
+
+            if (!validator.dateValidate(requestDate.getText())) {
+                JOptionPane.showMessageDialog(new JFrame(), "Invalid Date", "Dialog",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            User selectedDoctor = (User) doctorOption.getSelectedItem();
+            User player = ActiveUser.getActiveUser();
+            if (this.medicalService.isDuplicateAppointment(player.getId(), selectedDoctor.getId(), new Date(requestDate.getText()))) {
+                JOptionPane.showMessageDialog(new JFrame(), "Duplicate Appointment", "Dialog", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            MedicalHistory history = new MedicalHistory(null, reasonTF.getText(), "", "", new Date(requestDate.getText()), "Requested", selectedDoctor.getId());
+            List<MedicalHistory> histList = new ArrayList<>();
+            histList.add(history);
+            Medical medicalModel = new Medical(player.getId(), player.getName(), histList);
+            Medical result = this.medicalService.createAppointment(medicalModel);
+            if (result != null) {
+                JOptionPane.showMessageDialog(new JFrame(), "Appointment Scheduled", "Dialog",
+                        JOptionPane.INFORMATION_MESSAGE);
+                clearFields();
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "Error Scheduling appointment", "Dialog",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(new JFrame(), "Error Scheduling appointment", "Dialog",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_scheduleBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        // TODO add your handling code here:
+       clearFields();
+    }//GEN-LAST:event_clearBtnActionPerformed
+
+    private void clearFields(){
+         requestDate.setText("");
+        reasonTF.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clearBtn;
+    private javax.swing.JComboBox<User> doctorOption;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField reasonTF;
+    private javax.swing.JFormattedTextField requestDate;
+    private javax.swing.JButton scheduleBtn;
     // End of variables declaration//GEN-END:variables
 }
