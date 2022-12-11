@@ -46,10 +46,9 @@ public class AED_FinalProject {
 //         System.out.println(it.next());
 //         PageFrame frame = new PageFrame();
 //           new Inventory();
-//        new LoginFrame().setVisible(true);
+       new LoginFrame().setVisible(true);
 //        frame.setVisible(true);
-        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByKey("role", "doctor", "users").get("_id");
-        new DoctorHome(id);
+        //ObjectId id = (ObjectId) new CRUDDatabase().getRecordByKey("role", "doctor", "users").get("_id");
     }
     }
     

@@ -9,8 +9,13 @@ import model.ActiveUser;
 import services.UserService;
 import model.User;
 import enums.ROLES;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import view.players.HomePageFrame;
+import view.medical.doctor.DoctorHome;
+import view.venue.venueHomePage;
 
 /**
  *
@@ -162,11 +167,17 @@ public class LoginFrame extends javax.swing.JFrame {
         errorMessageLabel.setVisible(false);
         //call the db function
         if(userService.loginUser(userName, password)){
-            //move to another frame
+            try {
+                //enable the next screen
+                redirectScreen();
+            } catch (ParseException ex) {
+                Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //close the login screen
             this.setVisible(false);
-            JFrame frame=new HomePageFrame();
-            frame.setVisible(true);
-            //            redirectScreen();
+            
+//            JFrame frame=new HomePageFrame();
+//            frame.setVisible(true);
         }else{
             errorMessageLabel.setVisible(true);
         }
@@ -207,14 +218,26 @@ public class LoginFrame extends javax.swing.JFrame {
         });
     }
     
-    public void redirectScreen(){
+    public void redirectScreen() throws ParseException{
         
         User user= ActiveUser.getActiveUser();
         HomePageFrame h = new HomePageFrame();
         
         switch(user.getRoles()){
             
-            case COACH: System.out.println("view.common.LoginFrame.redirectScreen()");
+            case COACH: //visible coach screen
+                break;
+            case BBPLAYER:
+            case IHPLAYER: new HomePageFrame().setVisible(true);
+                           break;
+                           
+            case DOCTOR : new DoctorHome(user.getId()).setVisible(true);
+                           break;
+            case VENUEADMIN : new venueHomePage().setVisible(true);
+                           break;
+                        
+            default:
+                break;
             //case PLAYER: 
         }
         

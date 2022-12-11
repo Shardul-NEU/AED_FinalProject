@@ -14,6 +14,8 @@ public enum ROLES {
     COACH("coach"),
     DOCTOR("doctor"),
     BBPLAYER("bbplayer"),
+    VENUEADMIN("venueadmin"),
+    SYSADMIN("systemAdmin"),
     /**
      *
      */
@@ -31,6 +33,8 @@ public enum ROLES {
             case "player": return ROLES.IHPLAYER;
             case "doctor": return ROLES.DOCTOR;
             case "bbplayer": return ROLES.BBPLAYER;
+            case "venueadmin": return ROLES.VENUEADMIN;
+            case "systemadmin":return ROLES.SYSADMIN;
             default:
                 return null;
         }
