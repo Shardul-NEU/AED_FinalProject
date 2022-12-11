@@ -72,9 +72,6 @@ public class DoctorService {
 
                         allHistory.add(d);
                     }
-                   
-                    
-                    
                 }   
             }
         } finally {
@@ -217,9 +214,24 @@ public class DoctorService {
         
         Document playerData = (Document) crud.getRecordByKey("_id", id, "medical");
         
-        ArrayList<Document> histories = sortByDate((ArrayList<Document>) playerData.get("history"));
+        ArrayList<Document> histories = (ArrayList<Document>) playerData.get("history");//sortByDate((ArrayList<Document>) playerData.get("history"));
+  
         
-     
+        for(int i = 0; i < histories.size(); i++){
+                
+                    Document d = (Document) histories.get(i);
+                  
+                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                    SimpleDateFormat outputFormat= new SimpleDateFormat("MM/dd/yyyy");
+
+
+                    String finalStr;
+                    finalStr = outputFormat.format(d.get("date"));
+                    d.append("date", finalStr);
+                     
+                } 
+        
+        
         return histories;
     }
     

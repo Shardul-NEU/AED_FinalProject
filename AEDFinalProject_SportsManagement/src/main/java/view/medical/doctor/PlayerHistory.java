@@ -4,8 +4,10 @@
  */
 package view.medical.doctor;
 
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -23,6 +25,9 @@ public class PlayerHistory extends javax.swing.JFrame {
     ObjectId id;
     public PlayerHistory(ObjectId id, String name) throws ParseException {
         initComponents();
+        getContentPane().setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
+        pack();
+        setResizable(false);
         setVisible(true);
         this.id = id;
         nameLabel.setText(name);
@@ -37,20 +42,33 @@ public class PlayerHistory extends javax.swing.JFrame {
     
         ArrayList<Document> playerHistory = new DoctorService().getPlayerMedicalData(this.id);
         
-        String[] columnNames = {"Date", "Diagnised for", "Notes", "Medicine"};
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0){
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                   //all cells false
-                   return false;
-                };
-        };
+        System.out.println(playerHistory);
+        if(playerHistory != null){
+            String[] columnNames = {"Date", "Diagnised for", "Notes", "Medicine"};
+            DefaultTableModel model = new DefaultTableModel(columnNames, 0){
+                    @Override
+                    public boolean isCellEditable(int row, int column) {
+                       //all cells false
+                       return false;
+                    };
+            };
+
+            for(int i = 0; i < playerHistory.size(); i++){
+
+                Document his = playerHistory.get(i);
+                model.addRow(new Object[] { his.get("date"), his.get("shownFor"), his.get("notes"), his.get("medicine") });
+
+            }
+            historyTable.setModel(model);
+        }
+        else{
         
-        for(int i = 0; i < playerHistory.size(); i++){
-            
-            Document his = playerHistory.get(i);
-            model.addRow(new Object[] { his.get("date"), his.get("shownFor"), his.get("notes"), his.get("medicine") });
-            
+            JOptionPane.showMessageDialog(this,
+          "Player has no history!",
+          "Information",
+          JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        
         }
         
     }
@@ -68,14 +86,13 @@ public class PlayerHistory extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         nameLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        historyTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         nameLabel.setText("Name");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        historyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -83,7 +100,7 @@ public class PlayerHistory extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(historyTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,7 +121,16 @@ public class PlayerHistory extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,9 +138,9 @@ public class PlayerHistory extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable historyTable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel nameLabel;
     // End of variables declaration//GEN-END:variables
 }
