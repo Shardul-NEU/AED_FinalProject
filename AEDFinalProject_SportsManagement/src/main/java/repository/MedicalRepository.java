@@ -16,10 +16,13 @@ import org.bson.conversions.Bson;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.UpdateResult;
 import com.mongodb.util.JSON;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import model.MedicalHistory;
 import org.bson.types.ObjectId;
 
@@ -38,12 +41,10 @@ public class MedicalRepository {
     private final static String playerId = "playerId";
     private final static String historyField = "history";
 
-    private void insertAppointments(Medical medicalModel) {
+    public long insertAppointments(Medical medicalModel) {
         if (medicalModel != null && medicalModel.getPlayerId() != null) {
             try {
                 MongoCollection<Document> docs = this.crud.getCollection(SCHEMANAME);
-                BasicDBObject query = new BasicDBObject();
-//                query.put(playerId, medicalModel.getPlayerId());
                 Document document = docs.find(Filters.eq(playerId, medicalModel.getPlayerId())).first();
                 if (document == null) {
                     //create a new player with history
@@ -55,26 +56,57 @@ public class MedicalRepository {
                 //insert appointment
                 MedicalHistory history = medicalModel.getHistory().get(0);
                 BasicDBObject obj = (BasicDBObject) JSON.parse(new Gson().toJson(history));
+                obj.append("docId", history.getDocId());
+                obj.append("date",history.getDate());
 //                this.crud.addInArrayById(medicalModel.getPlayerId(), obj, historyField, SCHEMANAME);
                 BasicDBObject match = new BasicDBObject();
                 match.put(playerId, medicalModel.getPlayerId());
                 BasicDBObject updateArray = new BasicDBObject();
+                 
                 updateArray.put("$push", new BasicDBObject(historyField, obj));
                 UpdateResult result = docs.updateOne(match, updateArray);
-                result.getModifiedCount();
+                return result.getModifiedCount();
             } catch (Exception ex) {
                 ex.printStackTrace();
-
+                return -1;
             }
         } else {
-
+            return -1;
         }
 
     }
+    
+    public boolean isDuplicateAppointment(ObjectId personId,ObjectId doctorId, Date requestDate){
+//            this.crud.getRecordByKey(playerId, personId, SCHEMANAME);
+            MongoCollection<Document> docs = this.crud.getCollection(SCHEMANAME);
+                Document document = docs.find(Filters.eq(playerId,personId)).first();
+                if (document == null) {
+                    //create a new player with history
+                    return false;
+                }
+                List<Document> history=document.get("history",List.class);
+                
+                SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+                for(Document doc:history){
+                    ObjectId tempDocId=doc.get("docId", ObjectId.class);
+                  
+                    if(tempDocId.equals(doctorId)){
+                          Date reservedDate= doc.getDate("date");
+                        Calendar c1=Calendar.getInstance();
+                        Calendar c2=Calendar.getInstance();
+                        c1.setTime(requestDate);
+                        c2.setTime(reservedDate);
+                        if(c1.get(Calendar.YEAR)==c2.get(Calendar.YEAR) && c1.get(Calendar.MONTH)==c2.get(Calendar.MONTH)  && c1.get(Calendar.DAY_OF_MONTH)==c2.get(Calendar.DAY_OF_MONTH)  ){
+                            return true;
+                        }
+                    }
+                }
+                return false;
+    }
 
     public static void main(String[] args) {
-        ObjectId id = new ObjectId("6393d12e9c10df3ab8018900");
-        MedicalHistory history = new MedicalHistory(null, "knees", "testing via coed", "TA", new Date(), "REQUESTED", new ObjectId("63941fc0b283fac982ecf135"));
+        ObjectId id = new ObjectId("6394de72a7c4e9628926d008");
+        MedicalHistory history = new MedicalHistory(null, "knees", "testing via code", "TA", new Date(), "REQUESTED", new ObjectId("63941fc0b283fac982ecf135"));
         List<MedicalHistory> histories = new ArrayList<>();
         histories.add(history);
         Medical model = new Medical(id, "John Doe", histories);
@@ -82,5 +114,4 @@ public class MedicalRepository {
         repo.insertAppointments(model);
 
     }
-
 }

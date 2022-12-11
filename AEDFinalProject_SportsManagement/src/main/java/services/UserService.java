@@ -51,5 +51,9 @@ public class UserService {
      public User findUserByUserName(String username){
         return this.repository.fetchUserByUserName(username);
      }
+     
+     public List<User> fetchUserByRoles(ROLES role){
+         return this.repository.fetchUserByRoles(role);
+     }
 }
 
