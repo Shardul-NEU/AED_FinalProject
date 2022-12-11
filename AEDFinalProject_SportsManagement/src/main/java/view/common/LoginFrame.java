@@ -167,10 +167,8 @@ public class LoginFrame extends javax.swing.JFrame {
             JFrame frame=new HomePageFrame();
             frame.setVisible(true);
             //            redirectScreen();
-
         }else{
             errorMessageLabel.setVisible(true);
-
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
@@ -216,7 +214,7 @@ public class LoginFrame extends javax.swing.JFrame {
         switch(user.getRoles()){
             
             case COACH: System.out.println("view.common.LoginFrame.redirectScreen()");
-            case PLAYER: 
+//            case PLAYER: 
         }
         
     }

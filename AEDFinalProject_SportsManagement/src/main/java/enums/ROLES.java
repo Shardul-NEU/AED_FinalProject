@@ -10,9 +10,10 @@ package enums;
  * @author Shardul
  */
 public enum ROLES {
-    PLAYER("player"),
+    IHPLAYER("ihplayer"),
     COACH("coach"),
     DOCTOR("doctor"),
+    BBPLAYER("bbplayer"),
     /**
      *
      */
@@ -27,8 +28,9 @@ public enum ROLES {
         switch(s.toLowerCase()){
             case "coach": return ROLES.COACH;
             case "teammanager": return ROLES.TEAMMANAGER;
-            case "player": return ROLES.PLAYER;
+            case "player": return ROLES.IHPLAYER;
             case "doctor": return ROLES.DOCTOR;
+            case "bbplayer": return ROLES.BBPLAYER;
             default:
                 return null;
         }

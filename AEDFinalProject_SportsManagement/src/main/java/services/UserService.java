@@ -37,17 +37,19 @@ public class UserService {
         
     }
     
-     public User updateUser(User user){
+     public int updateUser(User user){
         int rowsUpdate= this.repository.updateUserInfo(user);
-        if(rowsUpdate < 1){
-            return null;
-        }
-        return user;
+        return rowsUpdate;
         
     }
      
      public List<ROLES> getUniqueRoles(){
           return this.repository.getUniqueRoles();
+     }
+     
+     
+     public User findUserByUserName(String username){
+        return this.repository.fetchUserByUserName(username);
      }
 }
 

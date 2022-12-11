@@ -78,7 +78,7 @@ public class Validation {
     
     public Boolean emailValidation(String email){
     
-        String regex = "^(.+)@(.+)$";  
+        String regex = "^(.+)@(.+)\\.[a-z]{2,3}$";  
         //Compile regular expression to get the pattern  
         Pattern pattern = Pattern.compile(regex);  
         
