@@ -17,6 +17,7 @@ import view.players.HomePageFrame;
 import view.medical.doctor.DoctorHome;
 import view.medical.pharmacy.PharmacyHome;
 import view.players.CoachesHomePage;
+import view.players.TeamManagerFrame;
 import view.systemadmin.SysadminHome;
 import view.venue.venueHomePage;
 
@@ -220,6 +221,9 @@ public class LoginFrame extends javax.swing.JFrame {
                             break;
             case PHARMACY: PharmacyHome pharHome = new PharmacyHome();
                             pharHome.setDefaultCloseOperation(1);
+                            break;
+            case TEAMMANAGER: TeamManagerFrame tm = new TeamManagerFrame();
+                            tm.setDefaultCloseOperation(1);
                         
             default:
                 break;

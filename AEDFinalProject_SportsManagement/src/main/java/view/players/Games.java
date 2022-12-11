@@ -24,11 +24,15 @@ public class Games extends javax.swing.JPanel {
 
     public List<Matches> matchesList = new ArrayList<Matches>();
     int count = 1;
-    public Games() {
+    String username;
+    String game;
+    public Games(String game) {
         initComponents();
         
+        this.game = game;
+        
         MatchesService matchservice = new MatchesService();
-        this.matchesList = matchservice.fetchAllRecords();
+        this.matchesList = matchservice.fetchAllRecords(this.game);
         DefaultTableModel dtm=(DefaultTableModel) this.gamesTable.getModel();
         String[] columnNames = { "Count", "Team", "Opponent", "Winner", "Final Score", "Stadium", "MVP" };
         DefaultTableModel model = new DefaultTableModel(columnNames, 0){

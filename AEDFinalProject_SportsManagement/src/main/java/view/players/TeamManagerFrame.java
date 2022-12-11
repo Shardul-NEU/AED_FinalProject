@@ -32,13 +32,14 @@ public final String ADD_BUTTON_CLICKED="ADD_BUTTON_CLICKED";
      */
     public TeamManagerFrame() {
         initComponents();
+        setVisible(true);
         populateTable();
     }
     
     public void populateTable(){
         
         MatchesService matchservice = new MatchesService();
-        this.matchesList = matchservice.fetchAllRecords();
+        this.matchesList = matchservice.fetchAllRecords(null);
         DefaultTableModel dtm=(DefaultTableModel) this.jTable1.getModel();
         String[] columnNames = { "Count", "Team", "Opponent", "Winner", "Final Score", "Stadium", "MVP" };
         DefaultTableModel model = new DefaultTableModel(columnNames, 0){
@@ -109,7 +110,7 @@ public final String ADD_BUTTON_CLICKED="ADD_BUTTON_CLICKED";
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Add/Update");
+        jButton1.setText("Update");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

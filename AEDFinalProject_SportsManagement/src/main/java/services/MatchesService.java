@@ -22,8 +22,8 @@ public class MatchesService {
     }
     MatchesRepository repository;
     
-    public List<Matches> fetchAllRecords(){
-         List<Document> documents= this.repository.fetchMatches();
+    public List<Matches> fetchAllRecords(String game){
+         List<Document> documents= this.repository.fetchMatches(game);
          List<Matches> match= new ArrayList<Matches>();
          for(Document doc: documents){
             Matches matches = new Matches(doc.getString("game"), doc.getString("team"), doc.getString("opponent"), doc.getString("winner"), doc.getString("finalscore"), doc.getString("stadium"), doc.getString("MVP"));

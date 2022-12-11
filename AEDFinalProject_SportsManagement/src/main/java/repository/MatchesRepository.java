@@ -31,9 +31,9 @@ import org.bson.types.ObjectId;
  */
 public class MatchesRepository {
     private MongoDatabase connection = DataBaseConnection.connectToDatabase().database;
-    ;
+    
     private CRUDDatabase crud = new CRUDDatabase();
-    ;
+    
     private final String SCHEMANAME = "matches";
     private final static String ObjectId = "opponent";
     
@@ -51,13 +51,21 @@ public class MatchesRepository {
         return matches;
     }
     
-    public List<Document> fetchMatches(){
+    public List<Document> fetchMatches(String game){
         MongoCollection<Document> document=this.crud.getCollection(SCHEMANAME);
         FindIterable<Document> iterDoc=document.find();
         Iterator<Document> itr= iterDoc.iterator();
         List<Document> documents= new ArrayList<Document>();
         while(itr.hasNext()){
-            documents.add(itr.next());
+            Document doc = itr.next();
+            if(game != null){
+                if(doc.get("game").toString().equals(game)){
+                    documents.add(doc);
+                }
+            }else{
+                documents.add(doc);
+            }
+            
         }
         return documents;
     }

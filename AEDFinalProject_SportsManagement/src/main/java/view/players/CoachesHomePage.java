@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
+import model.ActiveUser;
 import model.Matches;
+import model.User;
 import services.MatchesService;
 import view.players.TeamView;
 import view.players.panel.UpdateProfilePanel;
@@ -24,45 +26,23 @@ public class CoachesHomePage extends javax.swing.JFrame {
     public JSplitPane panel;
     public Matches matches;
     int count = 1;
-    
+    User user;
+    String game;
     /**
      * Creates new form CoachesHomePage
      */
     private Component rightPanel = new UpdateProfilePanel(null);
     public CoachesHomePage() {
-        
+        this.user = ActiveUser.getActiveUser();
+        this.game = this.user.getUsername().equals("ihcoach") ? "icehockey" : "basketball";
         initComponents();
-        Games games = new Games();
+        Games games = new Games(this.game);
         splitPane.setRightComponent(games);
         
     }
     
 
-        
-    public void populateTable(){
-        
-        MatchesService matchservice = new MatchesService();
-        this.matchesList = matchservice.fetchAllRecords();
-        DefaultTableModel dtm=(DefaultTableModel) this.gamesTable.getModel();
-        String[] columnNames = { "Count", "Team", "Opponent", "Winner", "Final Score", "Stadium", "MVP" };
-        DefaultTableModel model = new DefaultTableModel(columnNames, 0){
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                   //all cells false
-                   return false;
-                };
-        };
-        
-        matchesList.forEach(match ->{
-            
-            model.addRow(new Object[] { count, match.getTeam(), match.getOpponent(), match.getWinner(), match.getFinalScore(), match.getStadium(), match.getMvp()});
-            count++;
-        });
-        
-        gamesTable.setModel(model);
-        
-        
-    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -165,13 +145,13 @@ public class CoachesHomePage extends javax.swing.JFrame {
 
     private void gamesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gamesBtnActionPerformed
         // TODO add your handling code here:
-        Games games = new Games();
+        Games games = new Games(this.user.getUsername());
         this.splitPane.setRightComponent(games);
     }//GEN-LAST:event_gamesBtnActionPerformed
 
     private void teamBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamBtnActionPerformed
         // TODO add your handling code here:
-        this.rightPanel = new TeamView(splitPane);
+        this.rightPanel = new TeamView(splitPane, this.game);
         this.splitPane.setRightComponent(rightPanel);
     }//GEN-LAST:event_teamBtnActionPerformed
 

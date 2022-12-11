@@ -30,16 +30,22 @@ public class TeamView extends javax.swing.JPanel {
     /**
      * Creates new form TeamView
      */
-    public TeamView(JSplitPane panel) {
+    String game;
+    public TeamView(JSplitPane panel, String game) {
         initComponents();
         this.userService = new UserService();
         this.panel = panel;
+        this.game = game;
         populateTable();
     }
     
     private void populateTable(){
         
-        this.userList= this.userService.fetchUserByRoles(ROLES.BBPLAYER);
+        if(this.game.equals("basketball")){
+            this.userList= this.userService.fetchUserByRoles(ROLES.BBPLAYER);
+        }else{
+            this.userList= this.userService.fetchUserByRoles(ROLES.IHPLAYER);
+        }
         DefaultTableModel dtm=(DefaultTableModel) this.teamTable.getModel();
         String[] columnNames = {"Count", "Name", "Height" , "Weight", "Phone Number", "User Name"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0){
