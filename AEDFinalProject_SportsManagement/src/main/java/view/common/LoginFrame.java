@@ -225,7 +225,7 @@ public class LoginFrame extends javax.swing.JFrame {
         
         switch(user.getRoles()){
             
-            case COACH: //visible coach screen
+            case COACH: 
                 break;
             case BBPLAYER:
             case IHPLAYER: new HomePageFrame().setVisible(true);

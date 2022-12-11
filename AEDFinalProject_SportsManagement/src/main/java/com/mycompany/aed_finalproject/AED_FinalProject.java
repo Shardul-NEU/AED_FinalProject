@@ -16,6 +16,8 @@ import org.bson.types.ObjectId;
 import view.common.LoginFrame;
 import view.inventory.Inventory;
 import view.medical.doctor.DoctorHome;
+import view.players.CoachesHomePage;
+import view.players.TeamManagerFrame;
 
 /**
  *
@@ -46,8 +48,10 @@ public class AED_FinalProject {
 //         System.out.println(it.next());
 //         PageFrame frame = new PageFrame();
 //           new Inventory();
-       new LoginFrame().setVisible(true);
+//       new LoginFrame().setVisible(true);
 //        frame.setVisible(true);
+            new CoachesHomePage().setVisible(true);
+//            new TeamManagerFrame().setVisible(true);
         //ObjectId id = (ObjectId) new CRUDDatabase().getRecordByKey("role", "doctor", "users").get("_id");
     }
     }

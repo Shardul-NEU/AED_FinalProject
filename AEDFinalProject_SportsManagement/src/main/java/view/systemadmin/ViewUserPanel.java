@@ -55,6 +55,26 @@ public class ViewUserPanel extends javax.swing.JPanel {
             dtm.addRow(row);
        }
     }
+    
+//    private void populateplayerTable(){
+//        this.userList= this.userService.fetchUserByRoles(ROLES.BBPLAYER);
+//        DefaultTableModel dtm=(DefaultTableModel) this.userTable.getModel();
+//        Object[] row= new Object[dtm.getColumnCount()];
+//        dtm.setRowCount(0);
+//        int count=1;
+//        for(User user:userList){
+//            row[0]=count;
+//            count++;
+//            row[1]=user.getName();
+//            row[2]=user.getRoles().toString();
+//            row[3]=user.getEmail();
+//            row[4]=user.getHeight();
+//            row[5]=user.getWeight();
+//            row[6]=user.getUsername();
+//            row[7]=user.getPhoneNumber();
+//            dtm.addRow(row);
+//       }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
