@@ -5,10 +5,12 @@
 package services;
 
 import enums.ROLES;
+import java.util.ArrayList;
 import java.util.List;
 import model.ActiveUser;
 import repository.*;
 import model.User;
+import org.bson.Document;
 
 /**
  *
@@ -54,6 +56,18 @@ public class UserService {
      
      public List<User> fetchUserByRoles(ROLES role){
          return this.repository.fetchUserByRoles(role);
+     }
+     
+     public List<User> fetchAllRecords(){
+         List<Document> documents= this.repository.fetchUser();
+         List<User> users= new ArrayList<User>();
+         for(Document doc: documents){
+              User user = new User(doc.getString("name"), doc.getString("email"), ROLES.getRoles(doc.getString("role")), doc.getInteger("height"), doc.getInteger("weight"), doc.getString("phone"), doc.getString("username"), doc.getString("password"));
+            user.setId(doc.getObjectId("_id"));
+             users.add(user);
+         }
+         
+         return users;
      }
 }
 

@@ -19,6 +19,7 @@ import database.CRUDDatabase;
 import database.DataBaseConnection;
 import enums.ROLES;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import model.User;
 import org.bson.Document;
@@ -53,7 +54,19 @@ public class UserRepository {
         }
         return null;
     }
-
+    
+    public List<Document> fetchUser(){
+        MongoCollection<Document> document=this.crud.getCollection(SCHEMANAME);
+        FindIterable<Document> iterDoc=document.find();
+        Iterator<Document> itr= iterDoc.iterator();
+        List<Document> documents= new ArrayList<Document>();
+        while(itr.hasNext()){
+            documents.add(itr.next());
+        }
+        return documents;
+    } 
+    
+    
     public User fetchUserByUserName(String username) {
 
         MongoCollection<Document> document = this.crud.getCollection(SCHEMANAME);

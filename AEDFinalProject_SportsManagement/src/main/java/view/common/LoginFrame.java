@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import view.players.HomePageFrame;
 import view.medical.doctor.DoctorHome;
+import view.systemadmin.SysadminHome;
 import view.venue.venueHomePage;
 
 /**
@@ -33,6 +34,7 @@ public class LoginFrame extends javax.swing.JFrame {
         setResizable(false);
         this.userService= new UserService();
         errorMessageLabel.setVisible(false);
+        setVisible(true);
     }
 
     /**
@@ -174,7 +176,6 @@ public class LoginFrame extends javax.swing.JFrame {
                 Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             //close the login screen
-            this.setVisible(false);
             
 //            JFrame frame=new HomePageFrame();
 //            frame.setVisible(true);
@@ -221,7 +222,6 @@ public class LoginFrame extends javax.swing.JFrame {
     public void redirectScreen() throws ParseException{
         
         User user= ActiveUser.getActiveUser();
-        HomePageFrame h = new HomePageFrame();
         
         switch(user.getRoles()){
             
@@ -233,8 +233,14 @@ public class LoginFrame extends javax.swing.JFrame {
                            
             case DOCTOR : new DoctorHome(user.getId()).setVisible(true);
                            break;
-            case VENUEADMIN : new venueHomePage().setVisible(true);
+            case VENUEADMIN : venueHomePage ven = new venueHomePage();
+                                ven.setVisible(true);
+                                ven.setDefaultCloseOperation(1);
                            break;
+            case SYSADMIN : SysadminHome sys= new SysadminHome();
+                            sys.setVisible(true);
+                            sys.setDefaultCloseOperation(1);
+                            break;
                         
             default:
                 break;

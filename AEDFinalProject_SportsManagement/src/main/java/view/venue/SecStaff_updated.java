@@ -90,6 +90,14 @@ public class SecStaff_updated extends javax.swing.JPanel {
         });
 
         ordersTable.setFont(new Font("Serif", Font.PLAIN, 20));
+        ordersTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         ordersTable.setRowHeight(50);
         ordersTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
