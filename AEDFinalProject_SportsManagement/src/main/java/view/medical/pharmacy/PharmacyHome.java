@@ -58,6 +58,9 @@ public class PharmacyHome extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(234, 234, 253));
 
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
+
+        pharmacyTable.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 0, 14)); // NOI18N
         pharmacyTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -66,6 +69,7 @@ public class PharmacyHome extends javax.swing.JFrame {
 
             }
         ));
+        pharmacyTable.setRowHeight(50);
         pharmacyTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 pharmacyTableMouseClicked(evt);
@@ -73,7 +77,7 @@ public class PharmacyHome extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(pharmacyTable);
 
-        updateStatusBtn.setBackground(new java.awt.Color(153, 153, 153));
+        updateStatusBtn.setBackground(new java.awt.Color(102, 204, 255));
         updateStatusBtn.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         updateStatusBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         updateStatusBtn.setText("Update Status");
@@ -89,7 +93,7 @@ public class PharmacyHome extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 777, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(updateStatusBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );

@@ -105,6 +105,7 @@ public final class Backboard extends javax.swing.JFrame {
         jLabel3.setFont(new Font("Serif", Font.PLAIN, 20));
 
         ordersTable.setFont(new Font("Serif", Font.PLAIN, 20));
+        ordersTable.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 0, 14)); // NOI18N
         ordersTable.setRowHeight(50);
         ordersTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

@@ -67,35 +67,29 @@ public class Diagnosis extends javax.swing.JPanel {
         SaveRecord = new javax.swing.JButton();
         historyBtn = new javax.swing.JButton();
         nameLabel = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(234, 234, 253));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Diagnosis For");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 141, 35));
-        add(diagnosisForField, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 420, 50));
+
+        diagnosisForField.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 0, 18)); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Notes");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 96, 41));
 
         notesField.setColumns(20);
+        notesField.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 0, 18)); // NOI18N
         notesField.setRows(5);
         jScrollPane1.setViewportView(notesField);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 420, -1));
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Medicine");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, 91, 42));
 
         medicineField.setColumns(20);
+        medicineField.setFont(new java.awt.Font("Hiragino Maru Gothic ProN", 0, 18)); // NOI18N
         medicineField.setRows(5);
         jScrollPane2.setViewportView(medicineField);
-
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, 420, 80));
 
         SaveRecord.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         SaveRecord.setText("Save Record");
@@ -104,7 +98,6 @@ public class Diagnosis extends javax.swing.JPanel {
                 SaveRecordMouseClicked(evt);
             }
         });
-        add(SaveRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 500, 160, 46));
 
         historyBtn.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         historyBtn.setText("View History");
@@ -113,15 +106,67 @@ public class Diagnosis extends javax.swing.JPanel {
                 historyBtnMouseClicked(evt);
             }
         });
-        add(historyBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 500, 168, 46));
 
         nameLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         nameLabel.setText("Name");
-        add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 30));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pictures/Stetho.png"))); // NOI18N
-        jLabel4.setText("jLabel4");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-140, 60, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(diagnosisForField, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(SaveRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(historyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)))))
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(diagnosisForField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(41, 41, 41)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(SaveRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(historyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveRecordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveRecordMouseClicked
@@ -186,7 +231,6 @@ public class Diagnosis extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea medicineField;

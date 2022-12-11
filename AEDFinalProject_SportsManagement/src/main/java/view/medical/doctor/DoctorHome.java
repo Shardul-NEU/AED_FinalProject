@@ -33,8 +33,6 @@ public class DoctorHome extends javax.swing.JFrame {
     ObjectId doctorId = null;
     public DoctorHome(ObjectId doctorId) throws ParseException {
         initComponents();
-        getContentPane().setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
-        pack();
         setResizable(false);
         setVisible(true);
         this.doctorId = doctorId;
@@ -101,7 +99,7 @@ public class DoctorHome extends javax.swing.JFrame {
         doctorNameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
         jPanel1.add(doctorNameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, -1, 30));
 
-        splitPanel.setResizeWeight(0.4);
+        splitPanel.setResizeWeight(0.2);
 
         appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,18 +143,16 @@ public class DoctorHome extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
         );
 
         splitPanel.setLeftComponent(jPanel2);
 
-        jPanel1.add(splitPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 830, 500));
+        jPanel1.add(splitPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 870, 620));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 20)); // NOI18N
         jLabel1.setText("Appointments");
@@ -175,11 +171,15 @@ public class DoctorHome extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
