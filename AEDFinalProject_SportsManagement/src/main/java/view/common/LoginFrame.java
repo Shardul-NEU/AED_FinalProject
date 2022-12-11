@@ -210,11 +210,12 @@ public class LoginFrame extends javax.swing.JFrame {
     public void redirectScreen(){
         
         User user= ActiveUser.getActiveUser();
+        HomePageFrame h = new HomePageFrame();
         
         switch(user.getRoles()){
             
             case COACH: System.out.println("view.common.LoginFrame.redirectScreen()");
-//            case PLAYER: 
+            //case PLAYER: 
         }
         
     }

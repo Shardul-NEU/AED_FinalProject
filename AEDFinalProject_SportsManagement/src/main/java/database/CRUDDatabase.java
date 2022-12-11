@@ -41,6 +41,15 @@ public class CRUDDatabase {
         
     }
     
+    public Document getRecordByKey(String key, ObjectId value, String collectionName){
+    
+    
+        MongoCollection<Document> doc = getCollection(collectionName);
+        
+        return doc.find(new Document(key, value)).first();
+        
+    }
+    
     public DeleteResult deleteRecordByKey(String key, String value, String collectionName){
     
     
@@ -103,6 +112,19 @@ public class CRUDDatabase {
         return (int) result.getModifiedCount();
     }
     
+
+     public int updateDocumentById(Document query, Bson updates, UpdateOptions options, String collection){
+         MongoCollection<Document> coll = getCollection(collection);
+        try {
+                UpdateResult result = coll.updateOne(query, updates, options);
+                return (int) result.getModifiedCount();
+            } catch (MongoException me) {
+                System.err.println("Unable to update due to an error: " + me);
+            }
+        return 0;
+    
+    }
+
     public void insertDocument(Document doc, String collectionName){
        MongoCollection<Document> collection=this.getCollection(collectionName);
         collection.insertOne(doc);
@@ -132,6 +154,5 @@ public class CRUDDatabase {
         
     
     }
-    
     
 }

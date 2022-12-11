@@ -9,7 +9,10 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import database.CRUDDatabase;
+import java.text.ParseException;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import view.common.LoginFrame;
 import view.inventory.Inventory;
 import view.medical.doctor.DoctorHome;
@@ -30,7 +33,7 @@ public class AED_FinalProject {
 //        MongoCollection<Document> mainShift = database.getCollection("mainShift");
 //    }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         
         
 //      If want to connect to new collection create instacne below this.
@@ -43,8 +46,10 @@ public class AED_FinalProject {
 //         System.out.println(it.next());
 //         PageFrame frame = new PageFrame();
 //           new Inventory();
-        new LoginFrame().setVisible(true);
+//        new LoginFrame().setVisible(true);
 //        frame.setVisible(true);
+        ObjectId id = (ObjectId) new CRUDDatabase().getRecordByKey("role", "doctor", "users").get("_id");
+        new DoctorHome(id);
     }
     }
     
