@@ -154,5 +154,17 @@ public class CRUDDatabase {
         
     
     }
+     
+     public int updateDocumentById(Document query, Bson updates, UpdateOptions options, MongoCollection collection){
+        
+        try {
+                UpdateResult result = collection.updateOne(query, updates, options);
+                return (int) result.getModifiedCount();
+            } catch (MongoException me) {
+                System.err.println("Unable to update due to an error: " + me);
+            }
+        return 0;
+    
+    }
     
 }

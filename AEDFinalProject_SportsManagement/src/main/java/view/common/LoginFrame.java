@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import view.players.HomePageFrame;
 import view.medical.doctor.DoctorHome;
+import view.medical.pharmacy.PharmacyHome;
+import view.players.CoachesHomePage;
 import view.systemadmin.SysadminHome;
 import view.venue.venueHomePage;
 
@@ -184,40 +186,6 @@ public class LoginFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_loginBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginFrame().setVisible(true);
-            }
-        });
-    }
     
     public void redirectScreen() throws ParseException{
         
@@ -226,13 +194,22 @@ public class LoginFrame extends javax.swing.JFrame {
         switch(user.getRoles()){
             
             case COACH: 
+                CoachesHomePage coach = new CoachesHomePage();
+                coach.setVisible(true);
+                coach.setDefaultCloseOperation(1);
                 break;
             case BBPLAYER:
-            case IHPLAYER: new HomePageFrame().setVisible(true);
-                           break;
+            case IHPLAYER: 
+                HomePageFrame home  = new HomePageFrame();
+                home.setVisible(true);
+                home.setDefaultCloseOperation(1);
+                break;
                            
-            case DOCTOR : new DoctorHome(user.getId()).setVisible(true);
-                           break;
+            case DOCTOR : 
+                DoctorHome doctor =  new DoctorHome(user.getId());
+                doctor.setVisible(true);
+                doctor.setDefaultCloseOperation(1);
+                break;
             case VENUEADMIN : venueHomePage ven = new venueHomePage();
                                 ven.setVisible(true);
                                 ven.setDefaultCloseOperation(1);
@@ -241,6 +218,8 @@ public class LoginFrame extends javax.swing.JFrame {
                             sys.setVisible(true);
                             sys.setDefaultCloseOperation(1);
                             break;
+            case PHARMACY: PharmacyHome pharHome = new PharmacyHome();
+                            pharHome.setDefaultCloseOperation(1);
                         
             default:
                 break;

@@ -111,11 +111,7 @@ public class DoctorService {
             
         }
         
-        
-        
         return allHistory;
-        
-    
     }
     
     public Document getSelectedAppointment(ArrayList<Document> appointment, String name, String date){

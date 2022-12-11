@@ -32,35 +32,18 @@ public class CoachesHomePage extends javax.swing.JFrame {
     public CoachesHomePage() {
         
         initComponents();
-        populateTable();
+        Games games = new Games();
+        splitPane.setRightComponent(games);
         
-//        fillOrdertable();
     }
     
-//    public void populateTable(){
-//        MatchesService matchservice = new MatchesService();
-//        this.matchesList = matchservice.fetchAllRecords();
-//        DefaultTableModel dtm=(DefaultTableModel) this.jTable1.getModel();
-//        Object[] row= new Object[dtm.getColumnCount()];
-//        dtm.setRowCount(0);
-//        int count=1;
-//        for(Matches matches:matchesList){
-//            row[0]=count;
-//            count++;
-//            row[1]=matches.getTeam();
-//            row[2]=matches.getOpponent();
-//            row[3]=matches.getWinner();
-//            row[4]=matches.getFinalScore();
-//            row[5]=matches.getStadium();
-//            row[6]=matches.getMvp();
-//            dtm.addRow(row);
-//       }
+
         
-       public void populateTable(){
+    public void populateTable(){
         
         MatchesService matchservice = new MatchesService();
         this.matchesList = matchservice.fetchAllRecords();
-        DefaultTableModel dtm=(DefaultTableModel) this.jTable1.getModel();
+        DefaultTableModel dtm=(DefaultTableModel) this.gamesTable.getModel();
         String[] columnNames = { "Count", "Team", "Opponent", "Winner", "Final Score", "Stadium", "MVP" };
         DefaultTableModel model = new DefaultTableModel(columnNames, 0){
                 @Override
@@ -76,7 +59,7 @@ public class CoachesHomePage extends javax.swing.JFrame {
             count++;
         });
         
-        jTable1.setModel(model);
+        gamesTable.setModel(model);
         
         
     }
@@ -90,55 +73,55 @@ public class CoachesHomePage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jSplitPane1 = new javax.swing.JSplitPane();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        splitPane = new javax.swing.JSplitPane();
+        leftBackgroundPanel = new javax.swing.JPanel();
+        gamesBtn = new javax.swing.JButton();
+        teamBtn = new javax.swing.JButton();
+        rightBackgroundPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        gamesTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Games");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        gamesBtn.setText("Games");
+        gamesBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                gamesBtnActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Team");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        teamBtn.setText("Team");
+        teamBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                teamBtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout leftBackgroundPanelLayout = new javax.swing.GroupLayout(leftBackgroundPanel);
+        leftBackgroundPanel.setLayout(leftBackgroundPanelLayout);
+        leftBackgroundPanelLayout.setHorizontalGroup(
+            leftBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(leftBackgroundPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                .addGroup(leftBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(gamesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(leftBackgroundPanelLayout.createSequentialGroup()
+                        .addComponent(teamBtn)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        leftBackgroundPanelLayout.setVerticalGroup(
+            leftBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(leftBackgroundPanelLayout.createSequentialGroup()
                 .addGap(105, 105, 105)
-                .addComponent(jButton1)
+                .addComponent(gamesBtn)
                 .addGap(58, 58, 58)
-                .addComponent(jButton3)
+                .addComponent(teamBtn)
                 .addContainerGap(292, Short.MAX_VALUE))
         );
 
-        jSplitPane1.setLeftComponent(jPanel1);
+        splitPane.setLeftComponent(leftBackgroundPanel);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        gamesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -149,62 +132,60 @@ public class CoachesHomePage extends javax.swing.JFrame {
                 "Count", "Team", "Opponent", "Winner", "Final Score", "Mvp"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(gamesTable);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(96, Short.MAX_VALUE))
+        javax.swing.GroupLayout rightBackgroundPanelLayout = new javax.swing.GroupLayout(rightBackgroundPanel);
+        rightBackgroundPanel.setLayout(rightBackgroundPanelLayout);
+        rightBackgroundPanelLayout.setHorizontalGroup(
+            rightBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(181, Short.MAX_VALUE))
+        rightBackgroundPanelLayout.setVerticalGroup(
+            rightBackgroundPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightBackgroundPanelLayout.createSequentialGroup()
+                .addGap(0, 74, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jSplitPane1.setRightComponent(jPanel2);
+        splitPane.setRightComponent(rightBackgroundPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(splitPane)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSplitPane1)
+            .addComponent(splitPane)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void gamesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gamesBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Games games = new Games();
+        this.splitPane.setRightComponent(games);
+    }//GEN-LAST:event_gamesBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void teamBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamBtnActionPerformed
         // TODO add your handling code here:
-        this.rightPanel = new TeamView(jSplitPane1);
-        this.jSplitPane1.setRightComponent(rightPanel);
-    }//GEN-LAST:event_jButton3ActionPerformed
+        this.rightPanel = new TeamView(splitPane);
+        this.splitPane.setRightComponent(rightPanel);
+    }//GEN-LAST:event_teamBtnActionPerformed
 
     /**
      * @param args the command line arguments
      */
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton gamesBtn;
+    private javax.swing.JTable gamesTable;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel leftBackgroundPanel;
+    private javax.swing.JPanel rightBackgroundPanel;
+    private javax.swing.JSplitPane splitPane;
+    private javax.swing.JButton teamBtn;
     // End of variables declaration//GEN-END:variables
 }

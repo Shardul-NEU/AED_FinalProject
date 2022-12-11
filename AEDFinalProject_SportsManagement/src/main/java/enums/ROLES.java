@@ -16,9 +16,8 @@ public enum ROLES {
     BBPLAYER("bbplayer"),
     VENUEADMIN("venueadmin"),
     SYSADMIN("systemAdmin"),
-    /**
-     *
-     */
+    PHARMACY("pharmacyadmin"),
+    IVTADMIN("ivtadmin"),
     TEAMMANAGER("teammanager");
     private String name;
     ROLES(String name){
@@ -30,11 +29,14 @@ public enum ROLES {
         switch(s.toLowerCase()){
             case "coach": return ROLES.COACH;
             case "teammanager": return ROLES.TEAMMANAGER;
-            case "player": return ROLES.IHPLAYER;
             case "doctor": return ROLES.DOCTOR;
             case "bbplayer": return ROLES.BBPLAYER;
             case "venueadmin": return ROLES.VENUEADMIN;
             case "systemadmin":return ROLES.SYSADMIN;
+            case "pharmacyadmin": return ROLES.PHARMACY;
+            case "ivtadmin": return ROLES.IVTADMIN;
+            case "ihplayer": return ROLES.IHPLAYER;
+            
             default:
                 return null;
         }
