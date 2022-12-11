@@ -25,9 +25,6 @@ public class DoctorService {
         
         MongoCollection<Document> col = getCollection();
         
-        
-        
-    
     }
     
 }

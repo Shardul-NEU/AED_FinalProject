@@ -33,10 +33,8 @@ import org.bson.types.ObjectId;
 public class MedicalRepository {
 
     private MongoDatabase connection = DataBaseConnection.connectToDatabase().database;
-    ;
     
     private CRUDDatabase crud = new CRUDDatabase();
-    ;
     private final String SCHEMANAME = "medical";
     private final static String playerId = "playerId";
     private final static String historyField = "history";
@@ -104,14 +102,14 @@ public class MedicalRepository {
                 return false;
     }
 
-    public static void main(String[] args) {
-        ObjectId id = new ObjectId("6394de72a7c4e9628926d008");
-        MedicalHistory history = new MedicalHistory(null, "knees", "testing via code", "TA", new Date(), "REQUESTED", new ObjectId("63941fc0b283fac982ecf135"));
-        List<MedicalHistory> histories = new ArrayList<>();
-        histories.add(history);
-        Medical model = new Medical(id, "John Doe", histories);
-        MedicalRepository repo = new MedicalRepository();
-        repo.insertAppointments(model);
-
-    }
+//    public static void main(String[] args) {
+//        ObjectId id = new ObjectId("6394de72a7c4e9628926d008");
+//        MedicalHistory history = new MedicalHistory(null, "knees", "testing via code", "TA", new Date(), "REQUESTED", new ObjectId("63941fc0b283fac982ecf135"));
+//        List<MedicalHistory> histories = new ArrayList<>();
+//        histories.add(history);
+//        Medical model = new Medical(id, "John Doe", histories);
+//        MedicalRepository repo = new MedicalRepository();
+//        repo.insertAppointments(model);
+//
+//    }
 }
