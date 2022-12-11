@@ -4,8 +4,12 @@
  */
 package view.medical.doctor;
 
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import services.DoctorService;
 
 /**
@@ -89,6 +93,11 @@ public class Diagnosis extends javax.swing.JPanel {
         add(SaveRecord, new org.netbeans.lib.awtextra.AbsoluteConstraints(234, 504, 139, 46));
 
         historyBtn.setText("View History");
+        historyBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                historyBtnMouseClicked(evt);
+            }
+        });
         add(historyBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 504, 168, 46));
 
         nameLabel.setText("Name");
@@ -123,6 +132,18 @@ public class Diagnosis extends javax.swing.JPanel {
        
         
     }//GEN-LAST:event_SaveRecordMouseClicked
+
+    private void historyBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_historyBtnMouseClicked
+        // TODO add your handling code here:
+        try {
+            PlayerHistory ph = new PlayerHistory((ObjectId)this.appointment.get("medicalId"), this.appointment.get("name").toString());
+            ph.setDefaultCloseOperation(1);
+        } catch (ParseException ex) {
+            Logger.getLogger(Diagnosis.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_historyBtnMouseClicked
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

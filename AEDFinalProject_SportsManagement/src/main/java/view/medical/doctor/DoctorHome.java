@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 import services.DoctorService;
 
 /**
@@ -29,15 +30,16 @@ public class DoctorHome extends javax.swing.JFrame {
     ArrayList<Document> histories;
     int row = -1;
     String selectedDate = "";
-    
-    public DoctorHome() throws ParseException {
+    ObjectId doctorId = null;
+    public DoctorHome(ObjectId doctorId) throws ParseException {
         initComponents();
         getContentPane().setPreferredSize(Toolkit.getDefaultToolkit().getScreenSize());
         pack();
         setResizable(false);
         setVisible(true);
-        
-        histories = docSer.returnDateSortedData();
+        this.doctorId = doctorId;
+        doctorNameLabel.setText(docSer.getDoctorName(this.doctorId));
+        histories = docSer.returnDateSortedData(this.doctorId);
         
         fillDateTable();
         

@@ -36,9 +36,7 @@ public class DoctorService {
         return crud.getCollection("medical");
     }
     
-    public ArrayList<Document> returnDateSortedData() throws ParseException{
-        
-        
+    public ArrayList<Document> returnDateSortedData(ObjectId doctorId) throws ParseException{
         
         
         MongoCollection<Document> col = getCollection();
@@ -58,18 +56,24 @@ public class DoctorService {
                 for(int i = 0; i < histories.size(); i++){
                 
                     Document d = (Document) histories.get(i);
-                   
-                    SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-                    SimpleDateFormat outputFormat= new SimpleDateFormat("MM/dd/yyyy");
-                
-                
-                    String finalStr;
-                    finalStr = outputFormat.format(d.get("date"));
-                    d.append("date", finalStr);
-                    d.append("name", doc.get("name"));
-                    d.append("medicalId", doc.get("_id"));
                     
-                    allHistory.add(d);
+                    if(d.get("docId").toString().equals(doctorId.toString())){
+                        
+                        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                        SimpleDateFormat outputFormat= new SimpleDateFormat("MM/dd/yyyy");
+
+
+                        String finalStr;
+                        finalStr = outputFormat.format(d.get("date"));
+                        d.append("date", finalStr);
+                        d.append("name", doc.get("name"));
+                        d.append("medicalId", doc.get("_id"));
+
+
+                        allHistory.add(d);
+                    }
+                   
+                    
                     
                 }   
             }
@@ -78,6 +82,12 @@ public class DoctorService {
         }
          
         return sortByDate(allHistory);
+    
+    }
+    
+    public String getDoctorName(ObjectId id){
+    
+        return crud.getRecordByKey("_id", id, "users").get("name").toString();
     
     }
     
@@ -201,6 +211,18 @@ public class DoctorService {
         return crud.updateDocumentById(query, updates, options, "medical");
         
     }
+    
+    
+    public ArrayList<Document> getPlayerMedicalData(ObjectId id) throws ParseException{
+        
+        Document playerData = (Document) crud.getRecordByKey("_id", id, "medical");
+        
+        ArrayList<Document> histories = sortByDate((ArrayList<Document>) playerData.get("history"));
+        
+     
+        return histories;
+    }
+    
    
     
 }
