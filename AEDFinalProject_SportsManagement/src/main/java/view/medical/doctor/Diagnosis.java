@@ -4,10 +4,15 @@
  */
 package view.medical.doctor;
 
+import Util.EmailSMTP;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
+import model.ActiveUser;
+import model.User;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import services.DoctorService;
@@ -22,12 +27,15 @@ public class Diagnosis extends javax.swing.JPanel {
      * Creates new form Diagnosis
      */
     Document appointment;
+    User user;
     public Diagnosis(Document appointment) {
         initComponents();
         this.appointment = appointment;
         
         nameLabel.setText((String) this.appointment.get("name"));
         fillFields();
+        
+        this.user = ActiveUser.getActiveUser();
         
     }
     
@@ -124,7 +132,20 @@ public class Diagnosis extends javax.swing.JPanel {
             int result = new DoctorService().updateAppointment(this.appointment);
             
             if(result >0){
-                 JOptionPane.showMessageDialog(this, "Update was successfull");
+                
+                try {
+                    EmailSMTP email = new EmailSMTP(this.user.getEmail(),
+                            (String) this.appointment.get("name"),
+                            medicineField.getText(),
+                            user.getName());
+                    
+                    
+                    JOptionPane.showMessageDialog(this, "Update was successfull. Email was sent");
+                } catch (MessagingException ex) {
+                    Logger.getLogger(Diagnosis.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Diagnosis.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }else{
                 JOptionPane.showMessageDialog(this, "Error while updating please try again later");
             }

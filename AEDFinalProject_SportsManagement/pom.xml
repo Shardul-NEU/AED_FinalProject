@@ -79,6 +79,17 @@
             <version>2.10</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.5.0-b01</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.typesafe.play/play-mailer -->
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play-mailer_2.13</artifactId>
+            <version>8.0.1</version>
+        </dependency>
     </dependencies>
     <name>AEDFinalProject_SportsManagemet</name>
 </project>
