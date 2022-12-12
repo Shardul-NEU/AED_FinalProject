@@ -40,6 +40,8 @@ public class Diagnosis extends javax.swing.JPanel {
     }
     
     public void fillFields(){
+        
+        System.out.println(this.appointment);
     
         diagnosisForField.setText((String) this.appointment.get("shownFor"));
         notesField.setText((String) this.appointment.get("notes"));

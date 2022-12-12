@@ -57,12 +57,15 @@ public class DoctorService {
                 
                     Document d = (Document) histories.get(i);
                     
+                    
                     if(d.get("docId").toString().equals(doctorId.toString())){
                         
                         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                         SimpleDateFormat outputFormat= new SimpleDateFormat("MM/dd/yyyy");
 
-
+                        System.out.println("Okie Bhai");
+                        System.out.println(d);
+                        
                         String finalStr;
                         finalStr = outputFormat.format(d.get("date"));
                         d.append("date", finalStr);
@@ -119,6 +122,9 @@ public class DoctorService {
         for(int i = 0; i < appointment.size(); i++ ){
         
             Document doc = appointment.get(i);
+            
+            System.out.println("Chal bhai");
+            System.out.println(doc);
             
             if(doc.get("name").equals(name) && doc.get("date").equals(date)){
             
@@ -185,6 +191,10 @@ public class DoctorService {
         for(int i =0; i< playerHistories.size(); i++){
 
             Document playerHistory  = playerHistories.get(i);
+            
+            System.out.println("Player");
+            System.out.println(doc);
+            System.out.println(playerHistory);
             if(doc.get("id").toString().equals(playerHistory.get("id").toString())){
 
                 index = i;
